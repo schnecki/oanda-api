@@ -1,0 +1,79 @@
+name:                oanda-api
+version:             0.1.0.0
+github:              "schnecki/oanda-api"
+license:             BSD3
+author:              "Manuel Schneckenreither"
+maintainer:          "manuel.schneckenreither@uibk.ac.at"
+copyright:           "2019 Manuel Schneckenreither"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/schnecki/oanda-api#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- aeson
+- bytestring
+- http-client
+- http-client-tls
+- http-types
+- text
+- transformers-base
+- transformers
+- containers
+- monad-control
+- mtl
+- time
+- directory
+- filepath
+- conduit
+- conduit-extra
+- exceptions
+- deepseq
+- timerep
+- pretty
+- api-maker
+
+library:
+  source-dirs: src
+  ghc-options:
+    -Wall
+    -Wcompat
+    -Wincomplete-record-updates
+    -Wincomplete-uni-patterns
+    -Wredundant-constraints
+    -fwarn-tabs
+    -fno-warn-name-shadowing
+    -O2
+    -funbox-strict-fields
+
+executables:
+  oanda-api:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - oanda-api
+
+tests:
+  oanda-api-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - oanda-api

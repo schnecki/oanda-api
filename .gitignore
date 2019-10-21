@@ -1,3 +1,4 @@
+API_KEY
 dist
 dist-*
 cabal-dev
@@ -20,3 +21,5 @@ cabal.project.local
 cabal.project.local~
 .HTF/
 .ghc.environment.*
+TAGS
+stack.yaml.lock

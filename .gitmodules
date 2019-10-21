@@ -1,0 +1,3 @@
+[submodule "api-maker"]
+	path = api-maker
+	url = git@github.com:schnecki/api-maker.git
