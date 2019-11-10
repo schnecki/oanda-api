@@ -10,14 +10,14 @@ module Request.InstrumentCandlesGET
   ) where
 
 import           ApiMaker
-import           Data.Text                   (Text)
-import qualified Data.Text                   as T
+import           Data.Text                         (Text)
+import qualified Data.Text                         as T
 
-import           Data.Candles
-import           Data.CandlestickGranularity
-import           Data.DateTime
-import           Data.Instruments
-import           Data.WeeklyAlignment
+import           Data.Oanda.Candles
+import           Data.Oanda.CandlestickGranularity
+import           Data.Oanda.DateTime
+import           Data.Oanda.Instruments
+import           Data.Oanda.WeeklyAlignment
 import           Request.Class
 import           Types
 

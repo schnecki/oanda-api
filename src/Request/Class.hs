@@ -22,8 +22,8 @@ module Request.Class
   , headerContentDispositionFile
   , headerContentTypeMultipart
   , headerRFC3339DatetimeFormat
-  , runReqSafe
-  , ReqSafe (..)
+  , runSafeReqM
+  , SafeReqM (..)
   ) where
 
 import           Control.Monad.Base
@@ -82,14 +82,4 @@ headerBearer config = header "Authorization" ("Bearer " <> accessToken config)
 
 headerRFC3339DatetimeFormat :: Option 'Https
 headerRFC3339DatetimeFormat = header "Accept-Datetime-Format" "RFC3339"
-
-headerContentTypeJson :: Option 'Https
-headerContentTypeJson = header "content-type" "application/json"
-
-headerContentTypeMultipart :: Option 'Https
-headerContentTypeMultipart = header "content-type" "multipart/form-data"
-
-headerContentDispositionFile :: Text -> Option 'Https
-headerContentDispositionFile filename = header "Content-Disposition" (E.encodeUtf8 $ T.concat ["attachment; filename=\"", filename, "\""])
-
 

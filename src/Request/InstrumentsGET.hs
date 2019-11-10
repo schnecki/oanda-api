@@ -8,9 +8,9 @@ module Request.InstrumentsGET
   ) where
 
 import           ApiMaker
-import qualified Data.Text        as T
+import qualified Data.Text              as T
 
-import           Data.Instruments
+import           Data.Oanda.Instruments
 import           Request.Class
 import           Types
 

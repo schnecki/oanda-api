@@ -9,7 +9,7 @@ module Request.AccountsGET
 
 import           ApiMaker
 
-import           Data.Accounts
+import           Data.Oanda.Accounts
 import           Request.Class
 
 data GetAccounts =

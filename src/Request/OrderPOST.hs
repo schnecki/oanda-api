@@ -16,8 +16,8 @@ import           GHC.Generics
 
 import           Request.Class
 
-import           Data.OrderRequest
-import           Data.OrderRequestResult
+import           Data.Oanda.OrderRequest
+import           Data.Oanda.OrderRequestResult
 import           Types
 
 

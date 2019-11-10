@@ -12,12 +12,12 @@ module Request.AccountConfigurationPATCH
 
 import           ApiMaker
 import           Data.Aeson
-import           Data.Text                       (Text)
-import qualified Data.Text                       as T
+import           Data.Text                             (Text)
+import qualified Data.Text                             as T
 import           GHC.Generics
 
-import           Data.AccountConfigurationResult
-import           Data.DecimalNumber
+import           Data.Oanda.AccountConfigurationResult
+import           Data.Oanda.DecimalNumber
 import           Request.Class
 import           Types
 

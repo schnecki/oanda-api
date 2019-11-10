@@ -10,7 +10,7 @@ module Request.AccountDetailsGET
 import           ApiMaker
 import           Control.Monad.Trans
 
-import           Data.AccountDetails
+import           Data.Oanda.AccountDetails
 import           Request.Class
 import           Types
 

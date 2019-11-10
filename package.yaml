@@ -33,6 +33,7 @@ dependencies:
 - monad-control
 - mtl
 - time
+- lens
 - directory
 - filepath
 - conduit

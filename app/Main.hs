@@ -1,23 +1,23 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import           Control.Monad             (forM, forM_, void)
-import           Control.Monad.Trans       (liftIO)
+import           Control.Monad                (forM, forM_, void)
+import           Control.Monad.Trans          (liftIO)
 import           Control.Monad.Trans.State
-import           Data.Aeson                (encode)
-import qualified Data.ByteString           as B
-import qualified Data.ByteString.Char8     as C
-import qualified Data.Word                 as W8
-import           Prelude                   hiding (id)
+import           Data.Aeson                   (encode)
+import qualified Data.ByteString              as B
+import qualified Data.ByteString.Char8        as C
+import qualified Data.Word                    as W8
+import           Prelude                      hiding (id)
 
 import           ApiMaker
 
-import           Data.AccountProperties
-import           Data.Accounts
-import           Data.Instrument
-import           Data.Instruments
-import           Data.OrderRequest
-import           Data.OrderRequest
+import           Data.Oanda.AccountProperties
+import           Data.Oanda.Accounts
+import           Data.Oanda.Instrument
+import           Data.Oanda.Instruments
+import           Data.Oanda.OrderRequest
+import           Data.Oanda.OrderRequest
 import           Request
 
 main :: IO ()

@@ -11,7 +11,7 @@ module Request.AccountSummaryGET
 
 import           ApiMaker
 
-import           Data.AccountDetails
+import           Data.Oanda.AccountDetails
 import           Request.Class
 import           Types
 

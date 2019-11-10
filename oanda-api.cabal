@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 40932dd841380b6993c710b54ac7561baeca97e0acc7084f48fc61e22e921fd1
+-- hash: 4e9bea2d8464f6bf83be0eea31cd0848e0ad5398212176cbc4d034e5c81a6de9
 
 name:           oanda-api
 version:        0.1.0.0
@@ -27,53 +27,54 @@ source-repository head
 
 library
   exposed-modules:
-      Data.Account
-      Data.AccountConfigurationResult
-      Data.AccountDetails
-      Data.AccountProperties
-      Data.Accounts
-      Data.AccountUnits
-      Data.Candles
-      Data.Candlestick
-      Data.CandlestickData
-      Data.CandlestickGranularity
-      Data.ClientConfigureTransaction
-      Data.ClientExtensions
-      Data.ClientPrice
-      Data.Currency
-      Data.DateTime
-      Data.DecimalNumber
-      Data.GuaranteedStopLossOrderMode
-      Data.Instrument
-      Data.InstrumentCommission
-      Data.Instruments
-      Data.InstrumentType
-      Data.Order
-      Data.OrderCancelReason
-      Data.OrderCancelTransaction
-      Data.OrderFillReason
-      Data.OrderFillTransaction
-      Data.OrderPositionFill
-      Data.OrderRequest
-      Data.OrderRequestResult
-      Data.OrderState
-      Data.OrderTriggerCondition
-      Data.OrderType
-      Data.Position
-      Data.PositionSide
-      Data.PriceBucket
-      Data.PriceValue
-      Data.StopLossDetails
-      Data.TakeProfitDetails
-      Data.TimeInForce
-      Data.TradeOpen
-      Data.TradeReduce
-      Data.TradeState
-      Data.TradeSummary
-      Data.TrailingStopLossDetails
-      Data.Transaction
-      Data.TransactionType
-      Data.WeeklyAlignment
+      Data.Oanda.Account
+      Data.Oanda.AccountConfigurationResult
+      Data.Oanda.AccountDetails
+      Data.Oanda.AccountProperties
+      Data.Oanda.Accounts
+      Data.Oanda.AccountUnits
+      Data.Oanda.Candles
+      Data.Oanda.Candlestick
+      Data.Oanda.CandlestickData
+      Data.Oanda.CandlestickGranularity
+      Data.Oanda.ClientConfigureTransaction
+      Data.Oanda.ClientExtensions
+      Data.Oanda.ClientPrice
+      Data.Oanda.Currency
+      Data.Oanda.DateTime
+      Data.Oanda.DecimalNumber
+      Data.Oanda.GuaranteedStopLossOrderMode
+      Data.Oanda.Instrument
+      Data.Oanda.InstrumentCommission
+      Data.Oanda.Instruments
+      Data.Oanda.InstrumentType
+      Data.Oanda.Order
+      Data.Oanda.OrderCancelReason
+      Data.Oanda.OrderCancelTransaction
+      Data.Oanda.OrderFillReason
+      Data.Oanda.OrderFillTransaction
+      Data.Oanda.OrderPositionFill
+      Data.Oanda.OrderRequest
+      Data.Oanda.OrderRequestResult
+      Data.Oanda.OrderState
+      Data.Oanda.OrderTriggerCondition
+      Data.Oanda.OrderType
+      Data.Oanda.Position
+      Data.Oanda.PositionSide
+      Data.Oanda.PriceBucket
+      Data.Oanda.PriceValue
+      Data.Oanda.StopLossDetails
+      Data.Oanda.TakeProfitDetails
+      Data.Oanda.TimeInForce
+      Data.Oanda.TradeOpen
+      Data.Oanda.TradeReduce
+      Data.Oanda.TradeState
+      Data.Oanda.TradeSummary
+      Data.Oanda.TrailingStopLossDetails
+      Data.Oanda.Transaction
+      Data.Oanda.TransactionType
+      Data.Oanda.WeeklyAlignment
+      OandaApi
       Request
       Request.AccountConfigurationPATCH
       Request.AccountDetailsGET
@@ -84,6 +85,7 @@ library
       Request.InstrumentsGET
       Request.OrderPOST
       Types
+      Util
   other-modules:
       Paths_oanda_api
   hs-source-dirs:
@@ -104,6 +106,7 @@ library
     , http-client
     , http-client-tls
     , http-types
+    , lens
     , monad-control
     , mtl
     , pretty
@@ -136,6 +139,7 @@ executable oanda-api
     , http-client
     , http-client-tls
     , http-types
+    , lens
     , monad-control
     , mtl
     , oanda-api
@@ -170,6 +174,7 @@ test-suite oanda-api-test
     , http-client
     , http-client-tls
     , http-types
+    , lens
     , monad-control
     , mtl
     , oanda-api
