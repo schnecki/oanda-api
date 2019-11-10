@@ -26,7 +26,7 @@ main = do
   putStrLn $ "API_KEY: " <> show apiKey
   let cfg = oandaConfigPracticeAccount apiKey
   res <-
-    runCfgReqWithParamsM (additionalParams cfg) cfg $
+    runSessReqWithParamsM (additionalParams cfg) cfg $
     flip evalStateT (Session Nothing Nothing Nothing) $ do
       accs <- mkReq GetAccounts
       liftIO $ print accs
