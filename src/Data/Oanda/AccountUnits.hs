@@ -5,12 +5,14 @@
 
 module Data.Oanda.AccountUnits
   ( AccountUnits(..)
+  , prettyAccountUnits
   ) where
 
 import           Control.DeepSeq
 import           Data.Aeson
-import           Data.Text       (pack, unpack)
+import           Data.Text        (pack, unpack)
 import           GHC.Generics
+import           Text.PrettyPrint
 import           Text.Printf
 
 newtype AccountUnits =
@@ -24,3 +26,6 @@ instance FromJSON AccountUnits where
 instance ToJSON AccountUnits where
   toJSON (AccountUnits v) = String (pack $ printf "%.4f" v)
 
+
+prettyAccountUnits :: AccountUnits -> Doc
+prettyAccountUnits (AccountUnits x) = float x

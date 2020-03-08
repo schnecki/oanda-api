@@ -18,7 +18,7 @@ import           GHC.Generics
 import           Data.Oanda.DecimalNumber
 import           Data.Oanda.InstrumentCommission
 import           Data.Oanda.InstrumentType
-import           Types
+import           Data.Oanda.Types
 
 data Instrument = Instrument
   { name                        :: InstrumentName             -- ^ The name of the Instrument

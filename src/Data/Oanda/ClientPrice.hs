@@ -14,7 +14,7 @@ import           GHC.Generics
 import           Data.Oanda.DateTime
 import           Data.Oanda.PriceBucket
 import           Data.Oanda.PriceValue
-import           Types
+import           Data.Oanda.Types
 
 
 data ClientPrice = ClientPrice

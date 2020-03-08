@@ -17,7 +17,7 @@ import           Data.Oanda.ClientExtensions
 import           Data.Oanda.DateTime
 import           Data.Oanda.PriceValue
 import           Data.Oanda.TradeState
-import           Types
+import           Data.Oanda.Types
 
 data TradeSummary = TradeSummary
   { id                      :: TradeId          -- ^ The Trade’s identifier, unique within the Trade’s Account.

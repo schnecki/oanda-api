@@ -12,7 +12,7 @@ import           GHC.Generics
 import           Data.Oanda.OrderCancelTransaction
 import           Data.Oanda.OrderFillTransaction
 import           Data.Oanda.Transaction
-import           Types
+import           Data.Oanda.Types
 
 
 data OrderRequestResult = OrderRequestResult

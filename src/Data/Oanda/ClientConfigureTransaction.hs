@@ -14,7 +14,7 @@ import           GHC.Generics
 import           Data.Oanda.DateTime
 import           Data.Oanda.DecimalNumber
 import           Data.Oanda.TransactionType
-import           Types
+import           Data.Oanda.Types
 
 data ClientConfigureTransaction = ClientConfigureTransaction
   { id              :: TransactionId   -- ^ The Transaction’s Identifier.

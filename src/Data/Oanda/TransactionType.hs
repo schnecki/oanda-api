@@ -11,7 +11,7 @@ import           Data.Text
 import           GHC.Generics
 
 import           Data.Oanda.DateTime
-import           Types
+import           Data.Oanda.Types
 
 
 data TransactionType

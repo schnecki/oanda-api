@@ -25,7 +25,7 @@ import           GHC.Generics
 import           Data.Oanda.DateTime
 import           Data.Oanda.OrderCancelReason
 import           Data.Oanda.TransactionType
-import           Types
+import           Data.Oanda.Types
 
 
 data OrderCancelTransaction = OrderCancelTransaction

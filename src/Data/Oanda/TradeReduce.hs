@@ -16,7 +16,7 @@ import           GHC.Generics
 import           Data.Oanda.AccountUnits
 import           Data.Oanda.DecimalNumber
 import           Data.Oanda.PriceValue
-import           Types
+import           Data.Oanda.Types
 
 
 data TradeReduce = TradeReduce

@@ -11,8 +11,8 @@ import           ApiMaker
 import           Control.Monad.Trans
 
 import           Data.Oanda.AccountDetails
+import           Data.Oanda.Types
 import           Request.Class
-import           Types
 
 
 newtype GetAccountDetails = GetAccountDetails AccountId

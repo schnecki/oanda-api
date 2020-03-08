@@ -10,7 +10,7 @@ import           GHC.Generics
 
 import           Data.Oanda.Candlestick
 import           Data.Oanda.CandlestickGranularity
-import           Types
+import           Data.Oanda.Types
 
 data Candles = Candles
   { instrument  :: InstrumentName         -- ^ The instrument whose Prices are represented by the candlesticks.

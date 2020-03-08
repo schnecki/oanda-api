@@ -11,7 +11,7 @@ import           Data.Text
 import           Data.Time
 import           GHC.Generics
 
-import           Types
+import           Data.Oanda.Types
 
 import           Data.Oanda.AccountUnits
 import           Data.Oanda.PositionSide

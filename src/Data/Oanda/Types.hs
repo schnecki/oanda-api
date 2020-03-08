@@ -1,4 +1,4 @@
-module Types where
+module Data.Oanda.Types where
 
 import           Data.Text (Text)
 

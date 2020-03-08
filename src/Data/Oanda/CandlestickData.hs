@@ -11,7 +11,7 @@ import           Data.Aeson
 import           GHC.Generics
 
 import           Data.Oanda.PriceValue
-import           Types
+import           Data.Oanda.Types
 
 data CandlestickData = CandlestickData
   { o :: PriceValue             -- ^ The first (open) price in the time-range represented by the candlestick.

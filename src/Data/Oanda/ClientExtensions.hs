@@ -9,7 +9,7 @@ import           Control.DeepSeq
 import           Data.Aeson
 import           GHC.Generics
 
-import           Types
+import           Data.Oanda.Types
 
 data ClientExtensions = ClientExtensions
   { id      :: ClientId         -- ^ The Client ID of the Order/Trade

@@ -11,8 +11,8 @@ import           ApiMaker
 import qualified Data.Text              as T
 
 import           Data.Oanda.Instruments
+import           Data.Oanda.Types
 import           Request.Class
-import           Types
 
 
 data GetInstruments = GetInstruments AccountId (Maybe [InstrumentName])

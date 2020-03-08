@@ -13,7 +13,7 @@ import           Data.Text
 import           GHC.Generics
 
 import           Data.Oanda.ClientConfigureTransaction
-import           Types
+import           Data.Oanda.Types
 import           Util
 
 data AccountConfigurationResult = AccountConfigurationResult

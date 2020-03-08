@@ -17,9 +17,9 @@ import           Data.Oanda.Candles
 import           Data.Oanda.CandlestickGranularity
 import           Data.Oanda.DateTime
 import           Data.Oanda.Instruments
+import           Data.Oanda.Types
 import           Data.Oanda.WeeklyAlignment
 import           Request.Class
-import           Types
 
 
 data GetInstrumentCandle = GetInstrumentCandle InstrumentName CandleConfig

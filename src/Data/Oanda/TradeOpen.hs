@@ -12,7 +12,7 @@ import           Data.Oanda.AccountUnits
 import           Data.Oanda.ClientExtensions
 import           Data.Oanda.DecimalNumber
 import           Data.Oanda.PriceValue
-import           Types
+import           Data.Oanda.Types
 
 
 -- ^ A TradeOpen object represents a Trade for an instrument that was opened in an Account. It is found embedded in

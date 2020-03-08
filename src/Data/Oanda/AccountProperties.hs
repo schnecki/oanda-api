@@ -9,7 +9,7 @@ import           Data.Aeson
 import           Data.Text
 import           GHC.Generics
 
-import           Types
+import           Data.Oanda.Types
 
 data AccountProperties = AccountProperties
   { id           :: AccountId

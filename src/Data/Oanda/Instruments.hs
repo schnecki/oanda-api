@@ -9,7 +9,7 @@ import           Data.Aeson
 import           GHC.Generics
 
 import           Data.Oanda.Instrument
-import           Types
+import           Data.Oanda.Types
 
 data Instruments = Instruments
   { instruments       :: [Instrument] -- ^ The requested list of instruments.

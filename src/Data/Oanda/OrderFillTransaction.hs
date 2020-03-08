@@ -31,7 +31,7 @@ import           Data.Oanda.OrderFillReason
 import           Data.Oanda.TradeOpen
 import           Data.Oanda.TradeReduce
 import           Data.Oanda.TransactionType
-import           Types
+import           Data.Oanda.Types
 
 
 data OrderFillTransaction = OrderFillTransaction

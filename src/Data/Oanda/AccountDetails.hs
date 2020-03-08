@@ -11,7 +11,7 @@ import           Data.Time
 import           GHC.Generics
 
 import           Data.Oanda.Account hiding (lastTransactionID)
-import           Types
+import           Data.Oanda.Types
 
 data AccountDetails = AccountDetails
   { account           :: Account       -- ^ The full details of the requested Account.

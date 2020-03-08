@@ -12,8 +12,8 @@ module Request.AccountSummaryGET
 import           ApiMaker
 
 import           Data.Oanda.AccountDetails
+import           Data.Oanda.Types
 import           Request.Class
-import           Types
 
 
 newtype GetAccountSummary = GetAccountSummary AccountId

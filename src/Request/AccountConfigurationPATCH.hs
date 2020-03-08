@@ -18,8 +18,8 @@ import           GHC.Generics
 
 import           Data.Oanda.AccountConfigurationResult
 import           Data.Oanda.DecimalNumber
+import           Data.Oanda.Types
 import           Request.Class
-import           Types
 
 data PatchAccountConfiguration = PatchAccountConfiguration AccountId AccountConfigurationUpdate
 

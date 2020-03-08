@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4e9bea2d8464f6bf83be0eea31cd0848e0ad5398212176cbc4d034e5c81a6de9
+-- hash: 5fa97903ea244df6cb4b2e949975c239d127df39a0274e5c8a41224528cbd739
 
 name:           oanda-api
 version:        0.1.0.0
@@ -73,6 +73,7 @@ library
       Data.Oanda.TrailingStopLossDetails
       Data.Oanda.Transaction
       Data.Oanda.TransactionType
+      Data.Oanda.Types
       Data.Oanda.WeeklyAlignment
       OandaApi
       Request
@@ -84,7 +85,6 @@ library
       Request.InstrumentCandlesGET
       Request.InstrumentsGET
       Request.OrderPOST
-      Types
       Util
   other-modules:
       Paths_oanda_api

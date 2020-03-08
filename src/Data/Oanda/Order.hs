@@ -14,7 +14,7 @@ import           GHC.Generics
 import           Data.Oanda.ClientExtensions
 import           Data.Oanda.DateTime
 import           Data.Oanda.OrderState
-import           Types
+import           Data.Oanda.Types
 
 data Order = Order
   { id               :: OrderId          -- ^ The Order’s identifier, unique within the Order’s Account.

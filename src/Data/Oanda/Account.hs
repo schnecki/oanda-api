@@ -14,7 +14,7 @@ import           Data.Aeson
 import           Data.Aeson.TH
 import           Data.Text                              (Text)
 import           GHC.Generics
-import           Types
+import           Text.PrettyPrint
 
 import           Data.Oanda.AccountUnits
 import           Data.Oanda.Currency
@@ -23,6 +23,7 @@ import           Data.Oanda.GuaranteedStopLossOrderMode
 import           Data.Oanda.Order
 import           Data.Oanda.Position
 import           Data.Oanda.TradeSummary
+import           Data.Oanda.Types
 
 
 data Account = Account
@@ -40,12 +41,8 @@ data Account = Account
     , financing                   :: AccountUnits                -- ^ The total amount of financing paid/collected over the lifetime of the Account.
     , commission                  :: AccountUnits                -- ^ The total amount of commission paid over the lifetime of the Account.
     , guaranteedExecutionFees     :: AccountUnits                -- ^ The total amount of fees charged over the lifetime of the Account for the execution of guaranteed Stop Loss Orders.
-    , marginRate                  :: Maybe MarginRate            -- ^ Client-provided margin rate override for the
-                                                                 -- Account. The effective margin rate of the Account is
-                                                                 -- the lesser of this value and the OANDA margin rate
-                                                                 -- for the Account’s division. This value is only
-                                                                 -- provided if a margin rate override exists for the
-                                                                 -- Account.
+    , marginRate                  :: Maybe MarginRate            -- ^ Client-provided margin rate override for the Account. The effective margin rate of the Account is the lesser of this value
+                                                                 -- and the OANDA margin rate for the Account’s division. This value is only provided if a margin rate override exists for the Account.
     , marginCallEnterTime         :: Maybe DateTime              -- ^ The date/time when the Account entered a margin call state. Only provided if the Account is in a margin call.
     , marginCallExtensionCount    :: Maybe Int                   -- ^ The number of times that the Account’s current margin call was extended.
     , lastMarginCallExtensionTime :: Maybe DateTime              -- ^ The date/time of the Account’s last margin call extension.
@@ -56,7 +53,7 @@ data Account = Account
     , unrealizedPL                :: AccountUnits                -- ^ The total unrealized profit/loss for all Trades currently open in the Account.
     , nav                         :: AccountUnits                -- ^ The net asset value of the Account. Equal to Account balance + unrealizedPL.
     , marginUsed                  :: AccountUnits                -- ^ Margin currently used for the Account.
-    , marginAvailable             :: AccountUnits                -- ^  Margin available for Account currency.
+    , marginAvailable             :: AccountUnits                -- ^ Margin available for Account currency.
     , positionValue               :: AccountUnits                -- ^ The value of the Account’s open positions represented in the Account’s home currency.
     , marginCloseoutUnrealizedPL  :: AccountUnits                -- ^ The Account’s margin closeout unrealized PL.
     , marginCloseoutNAV           :: AccountUnits                -- ^ The Account’s margin closeout NAV.
@@ -83,3 +80,5 @@ $(deriveFromJSON
            in f
       }
     ''Account)
+
+

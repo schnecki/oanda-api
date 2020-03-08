@@ -18,7 +18,7 @@ import           Request.Class
 
 import           Data.Oanda.OrderRequest
 import           Data.Oanda.OrderRequestResult
-import           Types
+import           Data.Oanda.Types
 
 
 data PostOrder =

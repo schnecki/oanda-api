@@ -26,7 +26,7 @@ import           Data.Oanda.StopLossDetails
 import           Data.Oanda.TakeProfitDetails
 import           Data.Oanda.TimeInForce
 import           Data.Oanda.TrailingStopLossDetails
-import           Types
+import           Data.Oanda.Types
 
 
 -- limitOrder = LimitOrderRequest LIMIT
