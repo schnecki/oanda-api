@@ -1,6 +1,8 @@
 module Data.Oanda.Types where
 
-import           Data.Text (Text)
+import           Data.Text        (Text)
+import           Prelude          hiding ((<>))
+import           Text.PrettyPrint
 
 type AccountId = Text
 type TransactionId = Text
@@ -25,3 +27,21 @@ type PositionValue = Text       -- TODO
 -- type PriceValue = Text          -- TODO make Double/Float ^ A decimal number encodes as a string. The amount of precision provided depends on the Price’s Instrument.
 
 type MarginRate = Text          -- TODO make Double
+
+
+nestCols :: Int
+nestCols = 65
+
+
+colName :: String -> Doc
+colName n = text n <> colon
+
+-- mVal :: Maybe
+mVal :: Maybe t -> (t -> Doc) -> Doc
+mVal Nothing _     = mempty
+mVal (Just v) line = line v
+
+mDefVal :: Doc -> Maybe t -> (t -> Doc) -> Doc
+mDefVal def Nothing _   = def
+mDefVal _ (Just v) line = line v
+

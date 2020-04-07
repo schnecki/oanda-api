@@ -22,6 +22,10 @@ import           Request.AccountDetailsGET         as R
 import           Request.AccountsGET               as R
 import           Request.AccountSummaryGET         as R
 
+import           Request.OpenTradesGET             as R
+
+
+import           Request.OrderGET                  as R
 import           Request.OrderPOST                 as R
 
 import           Request.InstrumentCandlesGET      as R

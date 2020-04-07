@@ -19,4 +19,4 @@ data OrderState
   | FILLED                      -- ^ The Order has been filled
   | TRIGGERED                   -- ^ The Order has been triggered
   | CANCELLED                   -- ^ The Order has been cancelled
-  deriving (Show, Eq, Ord, FromJSON, Generic, NFData)
+  deriving (Show, Eq, Ord, FromJSON, ToJSON, Generic, NFData)

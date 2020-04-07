@@ -7,13 +7,16 @@
 
 module Data.Oanda.Account
   ( Account(..)
+  , prettyAccountSummary
   ) where
 
 import           Control.DeepSeq
 import           Data.Aeson
 import           Data.Aeson.TH
 import           Data.Text                              (Text)
+import qualified Data.Text                              as T
 import           GHC.Generics
+import           Prelude                                hiding ((<>))
 import           Text.PrettyPrint
 
 import           Data.Oanda.AccountUnits
@@ -21,8 +24,12 @@ import           Data.Oanda.Currency
 import           Data.Oanda.DateTime
 import           Data.Oanda.GuaranteedStopLossOrderMode
 import           Data.Oanda.Order
-import           Data.Oanda.Position
-import           Data.Oanda.TradeSummary
+import           Data.Oanda.Position                    hiding (commission, financing,
+                                                         guaranteedExecutionFees,
+                                                         marginUsed, pl, resettablePL,
+                                                         unrealizedPL)
+import           Data.Oanda.TradeSummary                hiding (financing, marginUsed,
+                                                         unrealizedPL)
 import           Data.Oanda.Types
 
 
@@ -81,4 +88,51 @@ $(deriveFromJSON
       }
     ''Account)
 
+
+-- | Prints account without open trades, positions and prending orders
+prettyAccountSummary :: Account -> Doc
+prettyAccountSummary acc =
+  colName "Account ID"                                                   $$ nest nestCols (text $ T.unpack $ accountId acc) $+$
+  mVal (alias acc) (\a -> colName "Alias"                                $$ nest nestCols (text $ T.unpack a)) $+$
+  colName "Currency"                                                     $$ nest nestCols (text $ show $ currency acc) $+$
+  colName "Balance"                                                      $$ nest nestCols (prettyAccountUnits $ balance acc) $+$
+  -- colName "createdByUserID"                                           $$ nest nestCols (text $ show $ createdByUserID acc) $+$
+  -- colName "createdTime"                                               $$ nest nestCols (text $ show $ createdTime acc) $+$
+  colName "Guaranteed Stop Loss Order Mode"                              $$ nest nestCols (text $ show $ guaranteedStopLossOrderMode acc) $+$
+  colName "Total Profit/Loss Realised"                                   $$ nest nestCols (prettyAccountUnits $ pl acc) $+$
+  colName "Total Profit/Loss Realised Since Last Reset"                  $$ nest nestCols (prettyAccountUnits $ resettablePL acc) $+$
+  colName "Last Total Profit/Loss Reset Time"                            $$ nest nestCols (text $ show $ resettablePLTime acc) $+$
+  colName "Financing Paid/Collected"                                     $$ nest nestCols (prettyAccountUnits $ financing acc) $+$
+  colName "Commission Paid"                                              $$ nest nestCols (prettyAccountUnits $ commission acc) $+$
+  colName "Fees for Guaranteed Stop Loss Orders"                         $$ nest nestCols (prettyAccountUnits $ guaranteedExecutionFees acc) $+$
+  colName "Margin Rate"                                                  $$ nest nestCols (mDefVal "None set" (marginRate acc) (text . T.unpack)) $+$
+  colName "Margin Call Enter Time"                                       $$ nest nestCols (text $ show $ marginCallEnterTime acc) $+$
+  colName "Margin Call Extension Count"                                  $$ nest nestCols (text $ show $ marginCallExtensionCount acc) $+$
+  colName "Last Margin Call Extension Time"                              $$ nest nestCols (text $ show $ lastMarginCallExtensionTime acc) $+$
+  colName "Trades Currently Open"                                        $$ nest nestCols (text $ show $ openTradeCount acc) $+$
+  colName "Positions Currently Open"                                     $$ nest nestCols (text $ show $ openPositionCount acc) $+$
+  colName "Prending Order Count"                                         $$ nest nestCols (text $ show $ pendingOrderCount acc) $+$
+  colName "Hedging Enabled"                                              $$ nest nestCols (text $ show $ hedgingEnabled acc) $+$
+  colName "Unrealised Profit/Loss for Open Trades"                       $$ nest nestCols (prettyAccountUnits $ unrealizedPL acc) $+$
+  colName "Net Asset Value (Balance + Unrealised Profit/Loss)"           $$ nest nestCols (prettyAccountUnits $ nav acc) $+$
+  colName "Margin Used"                                                  $$ nest nestCols (prettyAccountUnits $ marginUsed acc) $+$
+  colName "Margin Available"                                             $$ nest nestCols (prettyAccountUnits $ marginAvailable acc) $+$
+  colName "Open Position Value in Home Currency"                         $$ nest nestCols (prettyAccountUnits $ positionValue acc) $+$
+  colName "Margin Closeout Unrealized Profit/Loss"                       $$ nest nestCols (prettyAccountUnits $ marginCloseoutUnrealizedPL acc) $+$
+  colName "Margin Closeout NAV"                                          $$ nest nestCols (prettyAccountUnits $ marginCloseoutNAV acc) $+$
+  colName "Margin Closeout Margin Used"                                  $$ nest nestCols (prettyAccountUnits $ marginCloseoutMarginUsed acc) $+$
+  colName "Margin Closeout Percent (if >=1.0 then margin closeout sit.)" $$ nest nestCols (text $ T.unpack $ marginCloseoutPercent acc) $+$
+  colName "Margin Closeout Position Value"                               $$ nest nestCols (text $ T.unpack $ marginCloseoutPositionValue acc) $+$
+  colName "Withdrawal Limit"                                             $$ nest nestCols (prettyAccountUnits $ withdrawalLimit acc) $+$
+  colName "Margin Call Margin Used"                                      $$ nest nestCols (prettyAccountUnits $ marginCallMarginUsed acc) $+$
+  colName "Margin Call Percent (if >=1.0 then margin call situation)"    $$ nest nestCols (text $ T.unpack $ marginCallPercent acc) $+$
+  colName "Last Transaction ID"                                          $$ nest nestCols (text $ T.unpack $ lastTransactionID acc)
+  -- colName "Open Trades"                                                  $$ nest nestCols (text $ show $ trades acc) $+$
+  -- colName "Positions"                                                    $$ nest nestCols (text $ show $ positions acc) $+$
+  -- colName "Pending Orders"                                               $$ nest nestCols (text $ show $ orders acc)
+  where colName n = text n <> colon
+        mVal Nothing _     = mempty
+        mVal (Just v) line = line v
+        mDefVal def Nothing _   = def
+        mDefVal _ (Just v) line = line v
 

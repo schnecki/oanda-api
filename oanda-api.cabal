@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5fa97903ea244df6cb4b2e949975c239d127df39a0274e5c8a41224528cbd739
+-- hash: 52435e2c8e7b1c53fc84e3ed4e6d9b9a634acd5fbe12a30405df1660eb23903f
 
 name:           oanda-api
 version:        0.1.0.0
@@ -53,10 +53,12 @@ library
       Data.Oanda.OrderCancelTransaction
       Data.Oanda.OrderFillReason
       Data.Oanda.OrderFillTransaction
+      Data.Oanda.OrderList
       Data.Oanda.OrderPositionFill
       Data.Oanda.OrderRequest
       Data.Oanda.OrderRequestResult
       Data.Oanda.OrderState
+      Data.Oanda.OrderStateFilter
       Data.Oanda.OrderTriggerCondition
       Data.Oanda.OrderType
       Data.Oanda.Position
@@ -64,13 +66,18 @@ library
       Data.Oanda.PriceBucket
       Data.Oanda.PriceValue
       Data.Oanda.StopLossDetails
+      Data.Oanda.StopLossOrder
       Data.Oanda.TakeProfitDetails
+      Data.Oanda.TakeProfitOrder
       Data.Oanda.TimeInForce
+      Data.Oanda.Trade
+      Data.Oanda.TradeList
       Data.Oanda.TradeOpen
       Data.Oanda.TradeReduce
       Data.Oanda.TradeState
       Data.Oanda.TradeSummary
       Data.Oanda.TrailingStopLossDetails
+      Data.Oanda.TrailingStopLossOrder
       Data.Oanda.Transaction
       Data.Oanda.TransactionType
       Data.Oanda.Types
@@ -84,6 +91,8 @@ library
       Request.Class
       Request.InstrumentCandlesGET
       Request.InstrumentsGET
+      Request.OpenTradesGET
+      Request.OrderGET
       Request.OrderPOST
       Util
   other-modules:
