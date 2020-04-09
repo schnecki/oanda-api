@@ -24,6 +24,7 @@ import           Request.AccountSummaryGET         as R
 
 import           Request.OpenTradesGET             as R
 
+import           Request.PositionsGET              as R
 
 import           Request.OrderGET                  as R
 import           Request.OrderPOST                 as R

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 52435e2c8e7b1c53fc84e3ed4e6d9b9a634acd5fbe12a30405df1660eb23903f
+-- hash: f23cf4d0b8bf596c94e0c92718aabf139cc4873a1bda82f9ceed32aabbcd4d90
 
 name:           oanda-api
 version:        0.1.0.0
@@ -62,6 +62,7 @@ library
       Data.Oanda.OrderTriggerCondition
       Data.Oanda.OrderType
       Data.Oanda.Position
+      Data.Oanda.PositionList
       Data.Oanda.PositionSide
       Data.Oanda.PriceBucket
       Data.Oanda.PriceValue
@@ -94,6 +95,7 @@ library
       Request.OpenTradesGET
       Request.OrderGET
       Request.OrderPOST
+      Request.PositionsGET
       Util
   other-modules:
       Paths_oanda_api

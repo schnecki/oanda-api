@@ -20,4 +20,5 @@ data TradeList = TradeList
 
 
 prettyTradeList :: TradeList -> Doc
+prettyTradeList (TradeList [] _)     = text "No trades"
 prettyTradeList (TradeList trades _) = vcat $ map prettyTrade trades

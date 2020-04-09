@@ -18,4 +18,4 @@ data OrderTriggerCondition
   | BID -- ^ Trigger an Order by comparing its price to the bid regardless of whether it is long or short.
   | ASK -- ^ Trigger an Order by comparing its price to the ask regardless of whether it is long or short.
   | MID -- ^ Trigger an Order by comparing its price to the midpoint regardless of whether it is long or short.
-  deriving (Show, Eq, Ord, FromJSON, ToJSON, Generic, NFData)
+  deriving (Enum, Bounded, Show, Eq, Ord, FromJSON, ToJSON, Generic, NFData)

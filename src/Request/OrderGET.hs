@@ -7,6 +7,7 @@
 
 module Request.OrderGET
   ( GetOrder (..)
+  , OrderConfig (..)
   , maxOrders
   , last50Orders
   ) where
@@ -33,7 +34,7 @@ data OrderConfig = OrderConfig
   { ids        :: Maybe [OrderId]           -- ^ List of Order IDs to retrieve
   , state      :: Maybe OrderStateFilter    -- ^ The state to filter the requested Orders by [default=PENDING]
   , instrument :: Maybe InstrumentName      -- ^ The instrument to filter the requested orders by
-  , count      :: Maybe Int                 -- ^ The maximum number of Orders to return [default=50, maximum=500]
+  , orderCount :: Maybe Int                 -- ^ The maximum number of Orders to return [default=50, maximum=500]
   , beforeID   :: Maybe OrderId             -- ^ The maximum Order ID to return. If not provided the most recent Orders in the Account are returned
   } deriving (Show, Eq, Ord, ToJSON, Generic, NFData)
 

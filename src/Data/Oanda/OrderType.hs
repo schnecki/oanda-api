@@ -11,13 +11,12 @@ import           Data.Aeson
 import           GHC.Generics
 
 
-data OrderType =
-   MARKET
+data OrderType
+  = MARKET
   | LIMIT
   | STOP
   | MARKET_IF_TOUCHED
   | TAKE_PROFIT
   | STOP_LOSS
   | TRAILING_STOP_LOSS
-  deriving (Show, Eq, Ord, ToJSON, FromJSON, Generic, NFData)
-
+  deriving (Enum, Bounded, Show, Eq, Ord, ToJSON, FromJSON, Generic, NFData)

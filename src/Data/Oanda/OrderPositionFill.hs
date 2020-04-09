@@ -16,4 +16,4 @@ data OrderPositionFill
   | REDUCE_FIRST -- ^ When the Order is filled, always fully reduce an existing Position before opening a new Position.
   | REDUCE_ONLY  -- ^ When the Order is filled, only reduce an existing Position.
   | DEFAULT      -- ^ When the Order is filled, use REDUCE_FIRST behaviour for non-client hedging Accounts, and OPEN_ONLY behaviour for client hedging Accounts.
-  deriving (Show, Eq, Ord, FromJSON, ToJSON, Generic, NFData)
+  deriving (Bounded, Enum, Show, Eq, Ord, FromJSON, ToJSON, Generic, NFData)

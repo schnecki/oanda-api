@@ -2,11 +2,11 @@
 {-# LANGUAGE DeriveGeneric  #-}
 module Data.Oanda.OrderList
   ( OrderList(..)
+  , prettyOrderList
   ) where
 
 import           Control.DeepSeq
 import           Data.Aeson
-import           Data.Text
 import           Data.Time
 import           GHC.Generics
 import           Text.PrettyPrint
@@ -21,4 +21,5 @@ data OrderList = OrderList
 
 
 prettyOrderList :: OrderList -> Doc
-prettyOrderList = undefined
+prettyOrderList (OrderList [] _)   = text "No orders"
+prettyOrderList (OrderList ords _) = vcat $ map prettyOrder ords

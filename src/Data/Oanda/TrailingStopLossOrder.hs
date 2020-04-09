@@ -128,7 +128,7 @@ $(deriveFromJSON
 
 prettyTrailingStopLossOrder :: TrailingStopLossOrder -> Doc
 prettyTrailingStopLossOrder order =
-    colName "Order ID"                                                            $$ nest nestCols (text $ T.unpack $ id order) $+$
+    colName "Order ID"                                                            $$ nest nestCols (text $ T.unpack $ Data.Oanda.TrailingStopLossOrder.id order) $+$
     colName "createTime"                                                          $$ nest nestCols (text $ show $ createTime order) $+$
     colName "state"                                                               $$ nest nestCols (text $ show $ state order) $+$
     colName "clientExtensions"                                                    $$ nest nestCols (prettyClientExtensions $ clientExtensions order) $+$

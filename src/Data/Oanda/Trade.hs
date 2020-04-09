@@ -63,15 +63,15 @@ prettyTrade trade =
   colName "openTime"                                                $$ nest nestCols (text $ show $ openTime trade) $+$                                     -- DateTime
   colName "state"                                                   $$ nest nestCols (text $ show $ Data.Oanda.Trade.state trade) $+$                       -- TradeState
   colName "initialUnits"                                            $$ nest nestCols (text $ show $ initialUnits trade) $+$                                 -- DecimalNumber
-  colName "initialMarginRequired"                                   $$ nest nestCols (text $ show $ initialMarginRequired trade) $+$                        -- AccountUnits
+  colName "initialMarginRequired"                                   $$ nest nestCols (prettyAccountUnits $ initialMarginRequired trade) $+$                        -- AccountUnits
   colName "currentUnits"                                            $$ nest nestCols (text $ show $ currentUnits trade) $+$                                 -- DecimalNumber
-  colName "realizedPL"                                              $$ nest nestCols (text $ show $ realizedPL trade) $+$                                   -- AccountUnits
-  colName "unrealizedPL"                                            $$ nest nestCols (text $ show $ unrealizedPL trade) $+$                                 -- AccountUnits
-  colName "marginUsed"                                              $$ nest nestCols (text $ show $ marginUsed trade) $+$                                   -- AccountUnits
+  colName "realizedPL"                                              $$ nest nestCols (prettyAccountUnits $ realizedPL trade) $+$                                   -- AccountUnits
+  colName "unrealizedPL"                                            $$ nest nestCols (prettyAccountUnits $ unrealizedPL trade) $+$                                 -- AccountUnits
+  colName "marginUsed"                                              $$ nest nestCols (prettyAccountUnits $ marginUsed trade) $+$                                   -- AccountUnits
   mVal (averageClosePrice trade) (\v -> colName "averageClosePrice" $$ nest nestCols (text $ show v)) $+$                                                   -- Maybe PriceValue
   colName "closingTransactionIDs"                                   $$ nest nestCols (text $ show $ closingTransactionIDs trade) $+$                        -- [TransactionId]
-  colName "financing"                                               $$ nest nestCols (text $ show $ financing trade) $+$                                    -- AccountUnits
-  colName "dividendAdjustment"                                      $$ nest nestCols (text $ show $ dividendAdjustment trade) $+$                           -- AccountUnits
+  colName "financing"                                               $$ nest nestCols (prettyAccountUnits $ financing trade) $+$                                    -- AccountUnits
+  colName "dividendAdjustment"                                      $$ nest nestCols (prettyAccountUnits $ dividendAdjustment trade) $+$                           -- AccountUnits
   mVal (closeTime trade) (\v -> colName "closeTime"                 $$ nest nestCols (text $ show v)) $+$                                                   -- Maybe DateTime
   colName "clientExtensions"                                        $$ nest nestCols (prettyClientExtensions $ Data.Oanda.Trade.clientExtensions trade) $+$ -- ClientExtensions
   mVal (closeTime trade) (\v -> colName "takeProfitOrder"           $$ nest nestCols (text $ show v)) $+$                                                   -- Maybe TakeProfitOrder

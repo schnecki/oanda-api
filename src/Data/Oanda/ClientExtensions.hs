@@ -2,7 +2,7 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE OverloadedStrings #-}
 module Data.Oanda.ClientExtensions
-    ( ClientExtensions
+    ( ClientExtensions (..)
     , prettyClientExtensions
     ) where
 

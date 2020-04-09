@@ -18,4 +18,4 @@ data TimeInForce
   | GFD -- ^ The Order is “Good For Day” and will be cancelled at 5pm New York time
   | FOK -- ^ The Order must be immediately “Filled Or Killed”
   | IOC -- ^ The Order must be “Immediatedly paritally filled Or Cancelled”
-  deriving (Show, Eq, Ord, FromJSON, ToJSON, Generic, NFData)
+  deriving (Bounded, Enum, Show, Eq, Ord, FromJSON, ToJSON, Generic, NFData)

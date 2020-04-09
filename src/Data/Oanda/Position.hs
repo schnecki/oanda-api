@@ -2,14 +2,16 @@
 {-# LANGUAGE DeriveGeneric  #-}
 module Data.Oanda.Position
     ( Position (..)
-
+    , prettyPosition
     ) where
 
 import           Control.DeepSeq
 import           Data.Aeson
 import           Data.Text
+import qualified Data.Text               as T
 import           Data.Time
 import           GHC.Generics
+import           Text.PrettyPrint
 
 import           Data.Oanda.Types
 
@@ -28,3 +30,17 @@ data Position = Position
   , long                    :: PositionSide -- ^ The details of the long side of the Position.
   , short                   :: PositionSide -- ^ The details of the short side of the Position.
   } deriving (Show, Eq, Ord, FromJSON, Generic, NFData)
+
+
+prettyPosition :: Position -> Doc
+prettyPosition pos =
+  colName "instrument"              $$ nest nestCols (text $ T.unpack $ instrument pos) $+$                              -- InstrumentName
+  colName "pl"                      $$ nest nestCols (text $ show $ Data.Oanda.Position.pl pos) $+$                      -- AccountUnits
+  colName "unrealizedPL"            $$ nest nestCols (text $ show $ Data.Oanda.Position.unrealizedPL pos) $+$            -- AccountUnits
+  colName "marginUsed"              $$ nest nestCols (text $ show $ marginUsed pos) $+$                                  -- AccountUnits
+  colName "resettablePL"            $$ nest nestCols (text $ show $ Data.Oanda.Position.resettablePL pos) $+$            -- AccountUnits
+  colName "financing"               $$ nest nestCols (text $ show $ Data.Oanda.Position.financing pos) $+$               -- AccountUnits
+  colName "commission"              $$ nest nestCols (text $ show $ commission pos) $+$                                  -- AccountUnits
+  colName "guaranteedExecutionFees" $$ nest nestCols (text $ show $ Data.Oanda.Position.guaranteedExecutionFees pos) $+$ -- AccountUnits
+  colName "long"                    $$ nest nestCols (prettyPositionSide $ long pos) $+$                                 -- PositionSide
+  colName "short"                   $$ nest nestCols (prettyPositionSide $ short pos)                                    -- PositionSide

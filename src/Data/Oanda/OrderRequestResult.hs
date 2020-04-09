@@ -2,12 +2,14 @@
 {-# LANGUAGE DeriveGeneric  #-}
 module Data.Oanda.OrderRequestResult
     ( OrderRequestResult (..)
-
+    , prettyOrderRequestResult
     ) where
 
 import           Control.DeepSeq
 import           Data.Aeson
+import qualified Data.Text                         as T
 import           GHC.Generics
+import           Text.PrettyPrint
 
 import           Data.Oanda.OrderCancelTransaction
 import           Data.Oanda.OrderFillTransaction
@@ -25,4 +27,14 @@ data OrderRequestResult = OrderRequestResult
   , lastTransactionID             :: TransactionId                -- ^ The ID of the most recent Transaction created for the Account
   } deriving (Show, Eq, Ord, FromJSON, Generic, NFData)
 
+
+prettyOrderRequestResult :: OrderRequestResult -> Doc
+prettyOrderRequestResult res =
+  colName "orderCreateTransaction"                                                        $$ nest nestCols (prettyTransaction $ orderCreateTransaction res) $+$ -- Transaction
+  mVal (orderFillTransaction res) (\v -> colName "orderFillTransaction"                   $$ nest nestCols (prettyOrderFillTransaction v)) $+$                  -- Maybe OrderFillTransaction
+  mVal (orderCancelTransaction res) (\v -> colName "orderCancelTransaction"               $$ nest nestCols (prettyOrderCancelTransaction v)) $+$                -- Maybe OrderCancelTransaction
+  mVal (orderReissueTransaction res) (\v -> colName "orderReissueTransaction"             $$ nest nestCols (prettyTransaction v)) $+$                           -- Maybe Transaction
+  mVal (orderReissueRejectTransaction res) (\v -> colName "orderReissueRejectTransaction" $$ nest nestCols (prettyTransaction v)) $+$                           -- Maybe Transaction
+  colName "relatedTransactionIDs"                                                         $$ nest nestCols (text $ show $ relatedTransactionIDs res) $+$        -- [TransactionId]
+  colName "lastTransactionID"                                                             $$ nest nestCols (text $ T.unpack $ lastTransactionID res)            -- TransactionId
 

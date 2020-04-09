@@ -7,11 +7,14 @@
 -- the OrderFill Transaction.
 module Data.Oanda.TradeReduce
   ( TradeReduce(..)
+  , prettyTradeReduce
   ) where
 
 import           Control.DeepSeq
 import           Data.Aeson
+import qualified Data.Text                as T
 import           GHC.Generics
+import           Text.PrettyPrint
 
 import           Data.Oanda.AccountUnits
 import           Data.Oanda.DecimalNumber
@@ -28,3 +31,14 @@ data TradeReduce = TradeReduce
   , guaranteedExecutionFee :: AccountUnits  -- ^ This is the fee that is charged for closing the Trade if it has a     guaranteed Stop Loss Order attached to it.
   , halfSpreadCost         :: AccountUnits  -- ^ The half spread cost for the trade reduce/close. This can be a positive     or negative value and is represented in the home currency of the Account.
   } deriving (Generic, Show, Eq, Ord, ToJSON, FromJSON, NFData)
+
+
+prettyTradeReduce :: TradeReduce -> Doc
+prettyTradeReduce red =
+  colName "tradeID"                $$ nest nestCols (text $ T.unpack $ tradeID red) $+$            -- TradeId
+  colName "units"                  $$ nest nestCols (text $ show $ units red) $+$                  -- DecimalNumber
+  colName "price"                  $$ nest nestCols (text $ show $ price red) $+$                  -- PriceValue
+  colName "realizedPL"             $$ nest nestCols (text $ show $ realizedPL red) $+$             -- AccountUnits
+  colName "financing"              $$ nest nestCols (text $ show $ financing red) $+$              -- AccountUnits
+  colName "guaranteedExecutionFee" $$ nest nestCols (text $ show $ guaranteedExecutionFee red) $+$ -- AccountUnits
+  colName "halfSpreadCost"         $$ nest nestCols (text $ show $ halfSpreadCost red)             -- AccountUnits

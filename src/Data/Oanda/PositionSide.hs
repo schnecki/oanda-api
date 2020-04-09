@@ -2,15 +2,13 @@
 {-# LANGUAGE DeriveGeneric  #-}
 module Data.Oanda.PositionSide
     ( PositionSide (..)
-
+    , prettyPositionSide
     ) where
-
 
 import           Control.DeepSeq
 import           Data.Aeson
-import           Data.Text
-import           Data.Time
 import           GHC.Generics
+import           Text.PrettyPrint
 
 import           Data.Oanda.AccountUnits
 import           Data.Oanda.PriceValue
@@ -27,3 +25,15 @@ data PositionSide = PositionSide
   , financing               :: AccountUnits -- ^ The total amount of financing paid/collected for this PositionSide over the lifetime of the Account.
   , guaranteedExecutionFees :: AccountUnits -- ^ The total amount of fees charged over the lifetime of the Account for the execution of guaranteed Stop Loss Orders attached to Trades for this PositionSide.
   } deriving (Show, Eq, Ord, FromJSON, Generic, NFData)
+
+
+prettyPositionSide :: PositionSide -> Doc
+prettyPositionSide side =
+  colName "units"                   $$ nest nestCols (text $ show $ units side) $+$               -- Double
+  colName "averagePrice"            $$ nest nestCols (text $ show $ averagePrice side) $+$        -- PriceValue
+  colName "tradeIDs"                $$ nest nestCols (text $ show $ tradeIDs side) $+$            -- [TradeId]
+  colName "pl"                      $$ nest nestCols (text $ show $ pl side) $+$                  -- AccountUnits
+  colName "unrealizedPL"            $$ nest nestCols (text $ show $ unrealizedPL side) $+$        -- AccountUnits
+  colName "resettablePL"            $$ nest nestCols (text $ show $ resettablePL side) $+$        -- AccountUnits
+  colName "financing"               $$ nest nestCols (text $ show $ financing side) $+$           -- AccountUnits
+  colName "guaranteedExecutionFees" $$ nest nestCols (text $ show $ guaranteedExecutionFees side) -- AccountUnits
