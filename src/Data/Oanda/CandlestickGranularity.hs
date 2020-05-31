@@ -31,4 +31,4 @@ data CandlestickGranularity
   | D -- ^ 1 day candlesticks, day alignment
   | W -- ^ 1 week candlesticks, aligned to start of week
   | M -- ^ 1 month candlesticks, aligned to first day of the month
-  deriving (Show, Eq, Ord, Generic, ToJSON, FromJSON, NFData)
+  deriving (Show, Eq, Ord, Bounded, Enum, Generic, ToJSON, FromJSON, NFData)

@@ -47,7 +47,7 @@ marketOrder ::
   -> TimeInForceMarketOrder -- ^ The time-in-force requested for the Market Order
   -> WorstPriceValue        -- ^ The worst price that the client is willing to have the Market Order filled at.
   -> OrderRequest
-marketOrder inst quantity tif priceBound = MarketOrderRequest MARKET inst quantity (fromTimeInForceMarketOrder tif) priceBound Fill.DEFAULT Nothing Nothing Nothing Nothing Nothing
+marketOrder inst quantity tif priceBnd = MarketOrderRequest MARKET inst quantity (fromTimeInForceMarketOrder tif) priceBnd Fill.DEFAULT Nothing Nothing Nothing Nothing Nothing
 
 data OrderRequest
   = MarketOrderRequest { orderRequestType       :: OrderType
