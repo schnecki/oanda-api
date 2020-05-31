@@ -77,27 +77,27 @@ $(deriveFromJSON
 
 prettyOrderFillTransaction :: OrderFillTransaction -> Doc
 prettyOrderFillTransaction order =
-  colName "id"                                              $+$ nest nestCols (text $ T.unpack $ Data.Oanda.OrderFillTransaction.id order) $+$                 -- TransactionId
-  colName "time"                                            $+$ nest nestCols (text $ show $ time order) $+$                                                   -- DateTime
-  colName "userID"                                          $+$ nest nestCols (text $ show $ userID order) $+$                                                 -- Int
-  colName "accountID"                                       $+$ nest nestCols (text $ T.unpack $ accountID order) $+$                                          -- AccountId
-  colName "batchID"                                         $+$ nest nestCols (text $ T.unpack $ batchID order) $+$                                            -- TransactionId
-  colName "requestID"                                       $+$ nest nestCols (text $ T.unpack $ requestID order) $+$                                          -- RequestId
-  colName "transactionType"                                 $+$ nest nestCols (text $ show $ transactionType order) $+$                                        -- TransactionType
-  colName "orderID"                                         $+$ nest nestCols (text $ T.unpack $ orderID order) $+$                                            -- OrderId
-  mVal (clientOrderID order) (\v -> colName "clientOrderID" $+$ nest nestCols (text $ T.unpack v)) $+$                                                         -- Maybe ClientId
-  colName "instrument"                                      $+$ nest nestCols (text $ T.unpack $ instrument order) $+$                                         -- InstrumentName
-  colName "units"                                           $+$ nest nestCols (text $ show $ Data.Oanda.OrderFillTransaction.units order) $+$                  -- DecimalNumber
-  colName "gainQuoteHomeConversionFactor"                   $+$ nest nestCols (text $ show $ gainQuoteHomeConversionFactor order) $+$                          -- DecimalNumber
-  colName "lossQuoteHomeConversionFactor"                   $+$ nest nestCols (text $ show $ lossQuoteHomeConversionFactor order) $+$                          -- DecimalNumber
-  colName "fullPrice"                                       $+$ nest nestCols (text $ show $ fullPrice order) $+$                                              -- ClientPrice
-  colName "reason"                                          $+$ nest nestCols (text $ show $ reason order) $+$                                                 -- OrderFillReason
-  colName "pl"                                              $+$ nest nestCols (text $ show $ pl order) $+$                                                     -- AccountUnits
-  colName "financing"                                       $+$ nest nestCols (text $ show $ Data.Oanda.OrderFillTransaction.financing order) $+$              -- AccountUnits
-  colName "commission"                                      $+$ nest nestCols (text $ show $ commission order) $+$                                             -- AccountUnits
-  colName "guaranteedExecutionFee"                          $+$ nest nestCols (text $ show $ Data.Oanda.OrderFillTransaction.guaranteedExecutionFee order) $+$ -- AccountUnits
-  colName "accountBalance"                                  $+$ nest nestCols (text $ show $ accountBalance order) $+$                                         -- AccountUnits
-  mVal (tradeOpened order) (\v -> colName "tradeOpened"     $+$ nest nestCols (prettyTradeOpen v)) $+$                                                         -- Maybe TradeOpen
-  colName "tradesClosed"                                    $+$ nest nestCols (vcat $ Prelude.map prettyTradeReduce $ tradesClosed order) $+$                  -- [TradeReduce]
-  mVal (tradeReduced order) (\v -> colName "tradeReduced"   $+$ nest nestCols (prettyTradeReduce v)) $+$                                                       -- Maybe TradeReduce
-  colName "halfSpreadCost"                                  $+$ nest nestCols (text $ show $ Data.Oanda.OrderFillTransaction.halfSpreadCost order)             -- AccountUnits
+  colName "id"                                              $$ nest nestCols (text $ T.unpack $ Data.Oanda.OrderFillTransaction.id order) $+$                 -- TransactionId
+  colName "time"                                            $$ nest nestCols (text $ show $ time order) $+$                                                   -- DateTime
+  colName "userID"                                          $$ nest nestCols (text $ show $ userID order) $+$                                                 -- Int
+  colName "accountID"                                       $$ nest nestCols (text $ T.unpack $ accountID order) $+$                                          -- AccountId
+  colName "batchID"                                         $$ nest nestCols (text $ T.unpack $ batchID order) $+$                                            -- TransactionId
+  colName "requestID"                                       $$ nest nestCols (text $ T.unpack $ requestID order) $+$                                          -- RequestId
+  colName "transactionType"                                 $$ nest nestCols (text $ show $ transactionType order) $+$                                        -- TransactionType
+  colName "orderID"                                         $$ nest nestCols (text $ T.unpack $ orderID order) $+$                                            -- OrderId
+  mVal (clientOrderID order) (\v -> colName "clientOrderID" $$ nest nestCols (text $ T.unpack v)) $+$                                                         -- Maybe ClientId
+  colName "instrument"                                      $$ nest nestCols (text $ T.unpack $ instrument order) $+$                                         -- InstrumentName
+  colName "units"                                           $$ nest nestCols (text $ show $ Data.Oanda.OrderFillTransaction.units order) $+$                  -- DecimalNumber
+  colName "gainQuoteHomeConversionFactor"                   $$ nest nestCols (text $ show $ gainQuoteHomeConversionFactor order) $+$                          -- DecimalNumber
+  colName "lossQuoteHomeConversionFactor"                   $$ nest nestCols (text $ show $ lossQuoteHomeConversionFactor order) $+$                          -- DecimalNumber
+  colName "fullPrice"                                       $$ nest nestCols (text $ show $ fullPrice order) $+$                                              -- ClientPrice
+  colName "reason"                                          $$ nest nestCols (text $ show $ reason order) $+$                                                 -- OrderFillReason
+  colName "pl"                                              $$ nest nestCols (text $ show $ pl order) $+$                                                     -- AccountUnits
+  colName "financing"                                       $$ nest nestCols (text $ show $ Data.Oanda.OrderFillTransaction.financing order) $+$              -- AccountUnits
+  colName "commission"                                      $$ nest nestCols (text $ show $ commission order) $+$                                             -- AccountUnits
+  colName "guaranteedExecutionFee"                          $$ nest nestCols (text $ show $ Data.Oanda.OrderFillTransaction.guaranteedExecutionFee order) $+$ -- AccountUnits
+  colName "accountBalance"                                  $$ nest nestCols (text $ show $ accountBalance order) $+$                                         -- AccountUnits
+  mVal (tradeOpened order) (\v -> colName "tradeOpened"     $$ nest nestCols (prettyTradeOpen v)) $+$                                                         -- Maybe TradeOpen
+  colName "tradesClosed"                                    $$ nest nestCols (vcat $ Prelude.map prettyTradeReduce $ tradesClosed order) $+$                  -- [TradeReduce]
+  mVal (tradeReduced order) (\v -> colName "tradeReduced"   $$ nest nestCols (prettyTradeReduce v)) $+$                                                       -- Maybe TradeReduce
+  colName "halfSpreadCost"                                  $$ nest nestCols (text $ show $ Data.Oanda.OrderFillTransaction.halfSpreadCost order)             -- AccountUnits

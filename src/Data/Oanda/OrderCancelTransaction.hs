@@ -58,14 +58,14 @@ $(deriveFromJSON
 
 prettyOrderCancelTransaction :: OrderCancelTransaction -> Doc
 prettyOrderCancelTransaction trans =
-  colName "id"                                                      $+$ nest nestCols (text $ T.unpack $ Data.Oanda.OrderCancelTransaction.id trans)  $+$ -- TransactionId
-  colName "time"                                                    $+$ nest nestCols (text $ show $ time trans)  $+$                                     -- DateTime
-  colName "userID"                                                  $+$ nest nestCols (text $ show $ userID trans)  $+$                                   -- Int
-  colName "accountID"                                               $+$ nest nestCols (text $ T.unpack $ accountID trans)  $+$                            -- AccountId
-  colName "batchID"                                                 $+$ nest nestCols (text $ T.unpack $ batchID trans)  $+$                              -- TransactionId
-  colName "requestID"                                               $+$ nest nestCols (text $ T.unpack $ requestID trans)  $+$                            -- RequestId
-  colName "transactionType"                                         $+$ nest nestCols (text $ show $ transactionType trans)  $+$                          -- TransactionType
-  colName "orderID"                                                 $+$ nest nestCols (text $ T.unpack $ orderID trans)  $+$                              -- OrderId
-  mVal (clientOrderID trans) (\v-> colName "clientOrderID"          $+$ nest nestCols (text $ T.unpack v))  $+$                                           -- Maybe OrderId
-  colName "reason"                                                  $+$ nest nestCols (text $ show $ reason trans)  $+$                                   -- OrderCancelReason
-  mVal (replacedByOrderID trans) (\v -> colName "replacedByOrderID" $+$ nest nestCols (text $ T.unpack v))                                                -- Maybe OrderId
+  colName "id"                                                      $$ nest nestCols (text $ T.unpack $ Data.Oanda.OrderCancelTransaction.id trans)  $+$ -- TransactionId
+  colName "time"                                                    $$ nest nestCols (text $ show $ time trans)  $+$                                     -- DateTime
+  colName "userID"                                                  $$ nest nestCols (text $ show $ userID trans)  $+$                                   -- Int
+  colName "accountID"                                               $$ nest nestCols (text $ T.unpack $ accountID trans)  $+$                            -- AccountId
+  colName "batchID"                                                 $$ nest nestCols (text $ T.unpack $ batchID trans)  $+$                              -- TransactionId
+  colName "requestID"                                               $$ nest nestCols (text $ T.unpack $ requestID trans)  $+$                            -- RequestId
+  colName "transactionType"                                         $$ nest nestCols (text $ show $ transactionType trans)  $+$                          -- TransactionType
+  colName "orderID"                                                 $$ nest nestCols (text $ T.unpack $ orderID trans)  $+$                              -- OrderId
+  mVal (clientOrderID trans) (\v-> colName "clientOrderID"          $$ nest nestCols (text $ T.unpack v))  $+$                                           -- Maybe OrderId
+  colName "reason"                                                  $$ nest nestCols (text $ show $ reason trans)  $+$                                   -- OrderCancelReason
+  mVal (replacedByOrderID trans) (\v -> colName "replacedByOrderID" $$ nest nestCols (text $ T.unpack v))                                                -- Maybe OrderId
