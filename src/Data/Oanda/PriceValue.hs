@@ -20,7 +20,7 @@ type WorstPriceValue = PriceValue
 -- ^ Price Value. The amount of precision provided depends on the Price’s Instrument.
 newtype PriceValue =
   PriceValue Float
-  deriving (Show, Eq, Ord, NFData, Num, Fractional)
+  deriving (Show, Read, Eq, Ord, NFData, Num, Fractional)
 
 instance FromJSON PriceValue where
   parseJSON (String v) = return $ PriceValue (read $ unpack v)

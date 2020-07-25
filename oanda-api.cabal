@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: f23cf4d0b8bf596c94e0c92718aabf139cc4873a1bda82f9ceed32aabbcd4d90
+-- hash: 74763d11b377e3d7576ff5ba37e2798581b2704d3753a9e6e8e9a57b8bfc20f5
 
 name:           oanda-api
 version:        0.1.0.0
@@ -126,6 +126,11 @@ library
     , timerep
     , transformers
     , transformers-base
+  if impl(ghc < 8.0)
+    ghc-options: -fno-warn-incomplete-patterns
+    cpp-options: -DType=*
+  if impl(ghc >= 8.6)
+    default-extensions: NoStarIsType
   default-language: Haskell2010
 
 executable oanda-api

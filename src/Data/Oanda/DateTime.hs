@@ -3,7 +3,7 @@
 {-# LANGUAGE OverloadedStrings          #-}
 module Data.Oanda.DateTime
     ( DateTime (..)
-
+    , fromDateTime
     ) where
 
 import           Control.DeepSeq
@@ -16,9 +16,18 @@ newtype DateTime =
   DateTime (Maybe UTCTime)
   deriving (Generic, Eq, Ord, NFData)
 
+fromDateTime :: DateTime -> Maybe UTCTime
+fromDateTime (DateTime mUtc) = mUtc
+
 instance Show DateTime where
   show (DateTime (Just time)) = formatTimeRFC3339 (utcToZonedTime utc time)
   show (DateTime Nothing)     = "0"
+
+instance Read DateTime where
+  readsPrec _ ('0':xs) = [(DateTime Nothing, xs)]
+  readsPrec _ str = [(DateTime $ zonedTimeToUTC <$> parseTimeRFC3339 bef, aft)]
+    where
+      (bef, aft) = span (/= ' ') str
 
 instance FromJSON DateTime where
   parseJSON (String v) = return $ DateTime $ zonedTimeToUTC <$> parseTimeRFC3339 v

@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveGeneric  #-}
 module Data.Oanda.CandlestickData
-    ( CandlestickData
+    ( CandlestickData (..)
     , prettyCandlestickData
     ) where
 
@@ -20,7 +20,7 @@ data CandlestickData = CandlestickData
   , h :: PriceValue             -- ^ The highest price in the time-range represented by the candlestick.
   , l :: PriceValue             -- ^ The lowest price in the time-range represented by the candlestick.
   , c :: PriceValue             -- ^ The last (closing) price in the time-range represented by the candlestick.
-  } deriving (Show, Eq, Ord, Generic, ToJSON, FromJSON, NFData)
+  } deriving (Show, Read, Eq, Ord, Generic, ToJSON, FromJSON, NFData)
 
 
 prettyCandlestickData :: CandlestickData -> Doc

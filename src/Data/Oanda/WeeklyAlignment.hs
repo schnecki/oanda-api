@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveGeneric  #-}
 module Data.Oanda.WeeklyAlignment
-    ( WeeklyAlignment
+    ( WeeklyAlignment (..)
     ) where
 
 import           Control.DeepSeq

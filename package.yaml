@@ -56,6 +56,13 @@ library:
     -fno-warn-name-shadowing
     -O2
     -funbox-strict-fields
+  when:
+    - condition: impl(ghc < 8.0)
+      ghc-options:       -fno-warn-incomplete-patterns
+      cpp-options:       -DType=*
+
+    - condition: impl(ghc >= 8.6)
+      default-extensions: NoStarIsType
 
 executables:
   oanda-api:
