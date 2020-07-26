@@ -43,6 +43,9 @@ dependencies:
 - timerep
 - pretty
 - api-maker
+- cereal-text
+- cereal
+- cereal-time
 
 library:
   source-dirs: src

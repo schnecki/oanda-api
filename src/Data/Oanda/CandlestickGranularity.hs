@@ -6,6 +6,7 @@ module Data.Oanda.CandlestickGranularity
 
 import           Control.DeepSeq
 import           Data.Aeson
+import           Data.Serialize
 import           GHC.Generics
 
 
@@ -31,4 +32,4 @@ data CandlestickGranularity
   | D   -- ^ 1 day candlesticks, day alignment
   | W   -- ^ 1 week candlesticks, aligned to start of week
   | M   -- ^ 1 month candlesticks, aligned to first day of the month
-  deriving (Show, Read, Eq, Ord, Bounded, Enum, Generic, ToJSON, FromJSON, NFData)
+  deriving (Show, Read, Eq, Ord, Bounded, Enum, Serialize, Generic, ToJSON, FromJSON, NFData)

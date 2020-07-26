@@ -9,6 +9,7 @@ module Data.Oanda.Candlestick
 
 import           Control.DeepSeq
 import           Data.Aeson
+import           Data.Serialize
 import           GHC.Generics
 import           Text.PrettyPrint
 
@@ -23,7 +24,7 @@ data Candlestick = Candlestick
   , mid      :: Maybe CandlestickData -- ^ The candlestick data based on midpoints. Only provided if midpoint-based candles were requested.
   , volume   :: Int                   -- ^ The number of prices created during the time-range represented by the candlestick.
   , complete :: Bool                  -- ^ A flag indicating if the candlestick is complete. A complete candlestick is one whose ending time is not in the future.
-  } deriving (Show, Read, Eq, Ord, Generic, FromJSON, NFData)
+  } deriving (Show, Read, Eq, Ord, Serialize, Generic, FromJSON, NFData)
 
 
 prettyCandlestick :: Candlestick -> Doc

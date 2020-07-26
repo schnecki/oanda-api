@@ -1,7 +1,7 @@
+{-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE TypeSynonymInstances       #-}
-
 module Data.Oanda.PriceValue
   ( PriceValue(..)
   , WorstPriceValue
@@ -10,7 +10,9 @@ module Data.Oanda.PriceValue
 
 import           Control.DeepSeq
 import           Data.Aeson
+import           Data.Serialize
 import           Data.Text        (pack, unpack)
+import           GHC.Generics
 import           Text.PrettyPrint
 import           Text.Printf
 
@@ -20,7 +22,7 @@ type WorstPriceValue = PriceValue
 -- ^ Price Value. The amount of precision provided depends on the Price’s Instrument.
 newtype PriceValue =
   PriceValue Float
-  deriving (Show, Read, Eq, Ord, NFData, Num, Fractional)
+  deriving (Show, Read, Eq, Ord, Serialize, Generic, NFData, Num, Fractional)
 
 instance FromJSON PriceValue where
   parseJSON (String v) = return $ PriceValue (read $ unpack v)

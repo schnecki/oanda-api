@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 74763d11b377e3d7576ff5ba37e2798581b2704d3753a9e6e8e9a57b8bfc20f5
+-- hash: 0ca25fd85513c1972748f5b578f243c248418586d7b0d84d2a23563f0e67075a
 
 name:           oanda-api
 version:        0.1.0.0
@@ -107,6 +107,9 @@ library
     , api-maker
     , base >=4.7 && <5
     , bytestring
+    , cereal
+    , cereal-text
+    , cereal-time
     , conduit
     , conduit-extra
     , containers
@@ -145,6 +148,9 @@ executable oanda-api
     , api-maker
     , base >=4.7 && <5
     , bytestring
+    , cereal
+    , cereal-text
+    , cereal-time
     , conduit
     , conduit-extra
     , containers
@@ -180,6 +186,9 @@ test-suite oanda-api-test
     , api-maker
     , base >=4.7 && <5
     , bytestring
+    , cereal
+    , cereal-text
+    , cereal-time
     , conduit
     , conduit-extra
     , containers

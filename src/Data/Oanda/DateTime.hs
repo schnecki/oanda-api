@@ -8,13 +8,15 @@ module Data.Oanda.DateTime
 
 import           Control.DeepSeq
 import           Data.Aeson
+import           Data.Serialize
 import           Data.Time
+import           Data.Time.Clock.Serialize ()
 import           Data.Time.RFC3339
 import           GHC.Generics
 
 newtype DateTime =
   DateTime (Maybe UTCTime)
-  deriving (Generic, Eq, Ord, NFData)
+  deriving (Generic, Serialize, Eq, Ord, NFData)
 
 fromDateTime :: DateTime -> Maybe UTCTime
 fromDateTime (DateTime mUtc) = mUtc

@@ -7,6 +7,7 @@ module Data.Oanda.CandlestickData
 
 import           Control.DeepSeq
 import           Data.Aeson
+import           Data.Serialize
 import qualified Data.Text             as T
 import           GHC.Generics
 import           Prelude               hiding ((<>))
@@ -20,7 +21,7 @@ data CandlestickData = CandlestickData
   , h :: PriceValue             -- ^ The highest price in the time-range represented by the candlestick.
   , l :: PriceValue             -- ^ The lowest price in the time-range represented by the candlestick.
   , c :: PriceValue             -- ^ The last (closing) price in the time-range represented by the candlestick.
-  } deriving (Show, Read, Eq, Ord, Generic, ToJSON, FromJSON, NFData)
+  } deriving (Show, Read, Eq, Ord, Serialize, Generic, ToJSON, FromJSON, NFData)
 
 
 prettyCandlestickData :: CandlestickData -> Doc
