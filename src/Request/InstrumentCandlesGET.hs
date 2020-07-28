@@ -35,7 +35,7 @@ data CandleConfig = CandleConfig
   , dailyAlignment    :: Maybe Int                    -- ^ The hour of the day (in the specified timezone) to use for granularities that have daily alignments. [default=17, minimum=0, maximum=23]                                                                                                                                                                           |
   , alignmentTimezone :: Maybe Text                   -- ^ The timezone to use for the dailyAlignment parameter. Candlesticks with daily alignment will be aligned to the dailyAlignment hour within the alignmentTimezone. Note that the returned times will still be represented in UTC. [default=America/New_York]                                                         |
   , weeklyAlignment   :: Maybe WeeklyAlignment        -- ^ The day of the week used for granularities that have weekly alignment. [default=Friday]                                                                                                                                                                                                                            |
-  }
+  } deriving (Show)
 
 
 instance Request OandaConfig GetInstrumentCandle where
