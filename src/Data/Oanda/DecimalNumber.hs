@@ -6,11 +6,13 @@
 module Data.Oanda.DecimalNumber
   ( DecimalNumber(..)
   , Quantity
+  , prettyDecimalNumber
   ) where
 
 import           Control.DeepSeq
 import           Data.Aeson
-import           Data.Text       (pack, unpack)
+import           Data.Text        (pack, unpack)
+import           Text.PrettyPrint
 import           Text.Printf
 
 
@@ -27,3 +29,6 @@ instance FromJSON DecimalNumber where
 instance ToJSON DecimalNumber where
   toJSON (DecimalNumber x) = String $ pack (printf "%.4f" x :: String)
 
+
+prettyDecimalNumber :: DecimalNumber -> Doc
+prettyDecimalNumber (DecimalNumber f) = text $ printf "%.4f" f

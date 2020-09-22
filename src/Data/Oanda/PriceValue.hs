@@ -19,7 +19,7 @@ import           Text.Printf
 
 type WorstPriceValue = PriceValue
 
--- ^ Price Value. The amount of precision provided depends on the Price’s Instrument.
+-- ^ Price Value is encoded as a string by OANDA. The amount of precision provided depends on the Price’s Instrument.
 newtype PriceValue =
   PriceValue Float
   deriving (Show, Read, Eq, Ord, Serialize, Generic, NFData, Num, Fractional)
