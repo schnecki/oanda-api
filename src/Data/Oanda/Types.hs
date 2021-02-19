@@ -24,8 +24,6 @@ type Percentage = Text          -- TODO
 type PositionValue = Text       -- TODO
 
 
--- type PriceValue = Text          -- TODO make Double/Float ^ A decimal number encodes as a string. The amount of precision provided depends on the Price’s Instrument.
-
 type MarginRate = Text          -- TODO make Double
 
 
