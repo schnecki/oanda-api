@@ -21,7 +21,9 @@ type WorstPriceValue = PriceValue
 
 -- ^ Price Value is encoded as a string by OANDA. The amount of precision provided depends on the Price’s Instrument.
 newtype PriceValue =
-  PriceValue Float
+  PriceValue
+    { fromPriceValue :: Float
+    }
   deriving (Show, Read, Eq, Ord, Serialize, Generic, NFData, Num, Fractional)
 
 instance FromJSON PriceValue where
@@ -33,3 +35,5 @@ instance ToJSON PriceValue where
 
 prettyPriceValue :: PriceValue -> Doc
 prettyPriceValue (PriceValue f) = text $ printf "%.4f" f
+
+

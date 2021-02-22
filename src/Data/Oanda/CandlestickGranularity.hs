@@ -2,12 +2,14 @@
 {-# LANGUAGE DeriveGeneric  #-}
 module Data.Oanda.CandlestickGranularity
     ( CandlestickGranularity (..)
+    , candlestickGranularityToNomialDiffTime
     ) where
 
 import           Control.DeepSeq
 import           Data.Aeson
 import           Data.Serialize
-import           GHC.Generics
+import           Data.Time.Clock
+import           GHC.Generics    hiding (M1)
 
 
 data CandlestickGranularity
@@ -33,3 +35,27 @@ data CandlestickGranularity
   | W   -- ^ 1 week candlesticks, aligned to start of week
   | M   -- ^ 1 month candlesticks, aligned to first day of the month
   deriving (Show, Read, Eq, Ord, Bounded, Enum, Serialize, Generic, ToJSON, FromJSON, NFData)
+
+
+candlestickGranularityToNomialDiffTime :: CandlestickGranularity -> NominalDiffTime
+candlestickGranularityToNomialDiffTime S5  = 5
+candlestickGranularityToNomialDiffTime S10 = 10
+candlestickGranularityToNomialDiffTime S15 = 15
+candlestickGranularityToNomialDiffTime S30 = 30
+candlestickGranularityToNomialDiffTime M1  = 60
+candlestickGranularityToNomialDiffTime M2  = 120
+candlestickGranularityToNomialDiffTime M4  = 240
+candlestickGranularityToNomialDiffTime M5  = 300
+candlestickGranularityToNomialDiffTime M10 = 600
+candlestickGranularityToNomialDiffTime M15 = 900
+candlestickGranularityToNomialDiffTime M30 = 1800
+candlestickGranularityToNomialDiffTime H1  = 3600
+candlestickGranularityToNomialDiffTime H2  = 7200
+candlestickGranularityToNomialDiffTime H3  = 10800
+candlestickGranularityToNomialDiffTime H4  = 14400
+candlestickGranularityToNomialDiffTime H6  = 21600
+candlestickGranularityToNomialDiffTime H8  = 28800
+candlestickGranularityToNomialDiffTime H12 = 43200
+candlestickGranularityToNomialDiffTime D   = 86400
+candlestickGranularityToNomialDiffTime W   = 604800
+candlestickGranularityToNomialDiffTime M   = 2551442.976
