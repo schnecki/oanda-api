@@ -6,6 +6,7 @@ module Data.Oanda.PriceValue
   ( PriceValue(..)
   , WorstPriceValue
   , prettyPriceValue
+  , showPriceValue
   ) where
 
 import           Control.DeepSeq
@@ -34,6 +35,9 @@ instance ToJSON PriceValue where
   toJSON (PriceValue x) = String $ pack (printf "%.4f" x :: String)
 
 prettyPriceValue :: PriceValue -> Doc
-prettyPriceValue (PriceValue f) = text $ printf "%.4f" f
+prettyPriceValue = text . showPriceValue
+
+showPriceValue :: PriceValue -> String
+showPriceValue (PriceValue f) = printf "%.4f" f
 
 

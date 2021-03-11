@@ -7,6 +7,7 @@ import           Control.Monad.Trans.State
 import           Data.Aeson                   (encode)
 import qualified Data.ByteString              as B
 import qualified Data.ByteString.Char8        as C
+import           Data.Time.Clock
 import qualified Data.Word                    as W8
 import           Prelude                      hiding (id)
 
@@ -14,6 +15,7 @@ import           ApiMaker
 
 import           Data.Oanda.AccountProperties
 import           Data.Oanda.Accounts
+import           Data.Oanda.DateTime
 import           Data.Oanda.Instrument
 import           Data.Oanda.Instruments
 import           Data.Oanda.OrderRequest
@@ -41,13 +43,17 @@ main = do
         liftIO $ print $ "Trying to set following values: " <> encode config
         res <- mkReq $ PatchAccountConfiguration accId config
         liftIO $ putStrLn $ take 100 $ show res
-        let candleCfg = CandleConfig (Just "M") (Just S5) (Just 6) Nothing Nothing Nothing Nothing Nothing Nothing Nothing -- count=6&price=M&granularity=S5
+        now <- liftIO getCurrentTime
+        let other = addUTCTime (negate $ fromIntegral $ 60 * 60 * 24 * 365 * 8) now
+        let candleCfg = CandleConfig (Just "M") (Just S5) (Just 6) (Just $ DateTime $ Just other)
+              Nothing Nothing Nothing Nothing Nothing Nothing -- count=6&price=M&granularity=S5
         res <- mkReq $ GetInstrumentCandle "EUR_USD" candleCfg
-        liftIO $ putStrLn $ take 100 $ show res
-        let orderReq = marketOrder "EUR_USD" 1.0 FOKMarketOrder 0.8
-        liftIO $ print $ encode orderReq
-      -- res <- mkReq $ PostOrder accId orderReq
-      -- liftIO $ print res
-        res <- mkReq $ GetAccountSummary accId
         liftIO $ print res
+      --   liftIO $ putStrLn $ take 100 $ show res
+      --   let orderReq = marketOrder "EUR_USD" 1.0 FOKMarketOrder 0.8
+      --   liftIO $ print $ encode orderReq
+      -- -- res <- mkReq $ PostOrder accId orderReq
+      -- -- liftIO $ print res
+      --   res <- mkReq $ GetAccountSummary accId
+      --   liftIO $ print res
   print res
