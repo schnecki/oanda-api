@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveGeneric  #-}
 module Data.Oanda.CandlestickGranularity
     ( CandlestickGranularity (..)
+    , candlestickGranularityInSeconds
     , candlestickGranularityToNomialDiffTime
     ) where
 
@@ -37,25 +38,29 @@ data CandlestickGranularity
   deriving (Show, Read, Eq, Ord, Bounded, Enum, Serialize, Generic, ToJSON, FromJSON, NFData)
 
 
+candlestickGranularityInSeconds :: CandlestickGranularity -> Double
+candlestickGranularityInSeconds S5  = 5
+candlestickGranularityInSeconds S10 = 10
+candlestickGranularityInSeconds S15 = 15
+candlestickGranularityInSeconds S30 = 30
+candlestickGranularityInSeconds M1  = 60
+candlestickGranularityInSeconds M2  = 120
+candlestickGranularityInSeconds M4  = 240
+candlestickGranularityInSeconds M5  = 300
+candlestickGranularityInSeconds M10 = 600
+candlestickGranularityInSeconds M15 = 900
+candlestickGranularityInSeconds M30 = 1800
+candlestickGranularityInSeconds H1  = 3600
+candlestickGranularityInSeconds H2  = 7200
+candlestickGranularityInSeconds H3  = 10800
+candlestickGranularityInSeconds H4  = 14400
+candlestickGranularityInSeconds H6  = 21600
+candlestickGranularityInSeconds H8  = 28800
+candlestickGranularityInSeconds H12 = 43200
+candlestickGranularityInSeconds D   = 86400
+candlestickGranularityInSeconds W   = 604800
+candlestickGranularityInSeconds M   = 2551442.976
+
+
 candlestickGranularityToNomialDiffTime :: CandlestickGranularity -> NominalDiffTime
-candlestickGranularityToNomialDiffTime S5  = 5
-candlestickGranularityToNomialDiffTime S10 = 10
-candlestickGranularityToNomialDiffTime S15 = 15
-candlestickGranularityToNomialDiffTime S30 = 30
-candlestickGranularityToNomialDiffTime M1  = 60
-candlestickGranularityToNomialDiffTime M2  = 120
-candlestickGranularityToNomialDiffTime M4  = 240
-candlestickGranularityToNomialDiffTime M5  = 300
-candlestickGranularityToNomialDiffTime M10 = 600
-candlestickGranularityToNomialDiffTime M15 = 900
-candlestickGranularityToNomialDiffTime M30 = 1800
-candlestickGranularityToNomialDiffTime H1  = 3600
-candlestickGranularityToNomialDiffTime H2  = 7200
-candlestickGranularityToNomialDiffTime H3  = 10800
-candlestickGranularityToNomialDiffTime H4  = 14400
-candlestickGranularityToNomialDiffTime H6  = 21600
-candlestickGranularityToNomialDiffTime H8  = 28800
-candlestickGranularityToNomialDiffTime H12 = 43200
-candlestickGranularityToNomialDiffTime D   = 86400
-candlestickGranularityToNomialDiffTime W   = 604800
-candlestickGranularityToNomialDiffTime M   = 2551442.976
+candlestickGranularityToNomialDiffTime = fromRational . toRational . candlestickGranularityInSeconds
