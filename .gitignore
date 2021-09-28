@@ -23,3 +23,4 @@ cabal.project.local~
 .ghc.environment.*
 TAGS
 stack.yaml.lock
+/oanda-api.cabal
