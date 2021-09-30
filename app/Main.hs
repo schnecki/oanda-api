@@ -17,8 +17,6 @@ import           Data.Oanda.AccountProperties
 import           Data.Oanda.Accounts
 import           Data.Oanda.DateTime
 import           Data.Oanda.Instrument
-import           Data.Oanda.Instruments
-import           Data.Oanda.OrderRequest
 import           Data.Oanda.OrderRequest
 import           Request
 

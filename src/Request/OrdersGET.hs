@@ -5,7 +5,7 @@
 {-# LANGUAGE TypeFamilies          #-}
 
 
-module Request.OrderGET
+module Request.OrdersGET
   ( GetOrder (..)
   , OrderConfig (..)
   , maxOrders

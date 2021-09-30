@@ -26,8 +26,8 @@ import           Request.OpenTradesGET             as R
 
 import           Request.PositionsGET              as R
 
-import           Request.OrderGET                  as R
 import           Request.OrderPOST                 as R
+import           Request.OrdersGET                 as R
 
 import           Request.InstrumentCandlesGET      as R
 import           Request.InstrumentsGET            as R
