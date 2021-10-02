@@ -45,7 +45,7 @@ dependencies:
 - api-maker
 - cereal-text
 - cereal
-- cereal-time
+# - cereal-time
 
 library:
   source-dirs: src

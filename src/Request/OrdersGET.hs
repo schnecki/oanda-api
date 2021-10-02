@@ -15,14 +15,12 @@ module Request.OrdersGET
 import           ApiMaker
 import           Control.DeepSeq
 import           Data.Aeson
-import qualified Data.Text                     as T
+import qualified Data.Text                   as T
 import           GHC.Generics
 
 import           Request.Class
 
 import           Data.Oanda.OrderList
-import           Data.Oanda.OrderRequest
-import           Data.Oanda.OrderRequestResult
 import           Data.Oanda.OrderStateFilter
 import           Data.Oanda.Types
 
