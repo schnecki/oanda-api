@@ -4,8 +4,6 @@ module Util where
 
 import           Data.Aeson
 import           Data.Char
-import           Data.Serialize (Serialize (..))
-import           Data.Time
 
 -- The following code is from https://github.com/jdreaver/oanda-rest-api/
 
@@ -33,18 +31,3 @@ dropPrefix prefix input = go prefix input
 
     contextual msg = "dropPrefix: " <> msg <> ". " <> prefix <> " " <> input
 
-
--- | 'Serialize' instance for 'UTCTime'.
-instance Serialize UTCTime where
-  put (UTCTime day dayTime) = put day >> put dayTime
-  get = UTCTime <$> get <*> get
-
--- | 'Serialize' instance for 'DiffTime'.
-instance Serialize DiffTime where
-  put = put . diffTimeToPicoseconds
-  get = picosecondsToDiffTime <$> get
-
--- | 'Serialize' instance for 'Day'.
-instance Serialize Day where
-  put = put . toModifiedJulianDay
-  get = ModifiedJulianDay <$> get

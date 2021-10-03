@@ -10,10 +10,9 @@ import           Control.DeepSeq
 import           Data.Aeson
 import           Data.Serialize
 import           Data.Time
+import           Data.Time.Clock.Serialize ()
 import           Data.Time.RFC3339
 import           GHC.Generics
-
-import           Util              ()
 
 newtype DateTime =
   DateTime (Maybe UTCTime)
