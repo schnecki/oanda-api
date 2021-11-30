@@ -39,5 +39,5 @@ instance Request OandaConfig PatchAccountConfiguration where
   url cfg (PatchAccountConfiguration accId _)  = baseUrl cfg /: "accounts" /: accId /: "configuration"
   body _ (PatchAccountConfiguration _ config) = ReqBodyJson config
   response _ PatchAccountConfiguration {} = jsonResponse
-  option _ PatchAccountConfiguration {} = headerRFC3339DatetimeFormat
+  option _ PatchAccountConfiguration {} = return headerRFC3339DatetimeFormat
   process _ PatchAccountConfiguration {} response = return $ responseBody response

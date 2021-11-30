@@ -27,7 +27,7 @@ instance Request OandaConfig GetInstruments where
   body _ GetInstruments {} = NoReqBody
   response _ GetInstruments {} = jsonResponse
   option _ (GetInstruments _ mInsts) =
-    headerRFC3339DatetimeFormat <>
+    return $ headerRFC3339DatetimeFormat <>
     case mInsts of
       Nothing    -> mempty
       Just insts -> "instruments" =: T.intercalate "," insts

@@ -27,5 +27,5 @@ instance Request OandaConfig GetOpenTrades where
   url cfg (GetOpenTrades accId) = baseUrl cfg /: "accounts" /: accId /: "openTrades"
   body _ GetOpenTrades {} = NoReqBody
   response _ GetOpenTrades {} = jsonResponse
-  option _ GetOpenTrades {} = headerRFC3339DatetimeFormat
+  option _ GetOpenTrades {} = return headerRFC3339DatetimeFormat
   process _ GetOpenTrades {} response = return $ responseBody response

@@ -47,7 +47,7 @@ instance Request OandaConfig GetInstrumentCandle where
   url cfg (GetInstrumentCandle instrument _) = baseUrl cfg /: "instruments" /: instrument /: "candles"
   body _ GetInstrumentCandle {} = NoReqBody
   response _ GetInstrumentCandle {} = jsonResponse
-  option _ (GetInstrumentCandle _ cfg) = headerRFC3339DatetimeFormat <> configs
+  option _ (GetInstrumentCandle _ cfg) = return $ headerRFC3339DatetimeFormat <> configs
     where
       configs =
         case cfg of

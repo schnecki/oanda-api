@@ -26,5 +26,5 @@ instance Request OandaConfig GetAccountDetails where
   url cfg (GetAccountDetails id) = baseUrl cfg /: "accounts" /: id
   body _ GetAccountDetails {} = NoReqBody
   response _ GetAccountDetails {} = jsonResponse
-  option _ GetAccountDetails {} = headerRFC3339DatetimeFormat
+  option _ GetAccountDetails {} = return headerRFC3339DatetimeFormat
   process _ GetAccountDetails {} response = return $ responseBody response

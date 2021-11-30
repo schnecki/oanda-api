@@ -27,5 +27,5 @@ instance Request OandaConfig GetPositions where
   url cfg (GetPositions accId) = baseUrl cfg /: "accounts" /: accId /: "positions"
   body _ GetPositions {} = NoReqBody
   response _ GetPositions {} = jsonResponse
-  option _ GetPositions {} = headerRFC3339DatetimeFormat
+  option _ GetPositions {} = return headerRFC3339DatetimeFormat
   process _ GetPositions {} response = return $ responseBody response

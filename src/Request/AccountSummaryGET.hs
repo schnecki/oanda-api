@@ -27,5 +27,5 @@ instance Request OandaConfig GetAccountSummary where
   url cfg (GetAccountSummary id) = baseUrl cfg /: "accounts" /: id
   body _ GetAccountSummary {} = NoReqBody
   response _ GetAccountSummary {} = jsonResponse
-  option _ GetAccountSummary {} = headerRFC3339DatetimeFormat
+  option _ GetAccountSummary {} = return headerRFC3339DatetimeFormat
   process _ GetAccountSummary {} response = return $ responseBody response

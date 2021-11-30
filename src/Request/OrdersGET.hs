@@ -49,7 +49,7 @@ instance Request OandaConfig GetOrder where
   url cfg (GetOrder accId _) = baseUrl cfg /: "accounts" /: accId /: "orders"
   body _ (GetOrder _ req) = NoReqBody
   response _ GetOrder {} = jsonResponse
-  option _ (GetOrder _ cfg) = headerRFC3339DatetimeFormat <> configs
+  option _ (GetOrder _ cfg) = return $ headerRFC3339DatetimeFormat <> configs
     where
       configs =
         case cfg of
