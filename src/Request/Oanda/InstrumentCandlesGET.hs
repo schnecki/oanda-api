@@ -3,7 +3,7 @@
 {-# LANGUAGE TypeFamilies          #-}
 
 
-module Request.InstrumentCandlesGET
+module Request.Oanda.InstrumentCandlesGET
   ( GetInstrumentCandle (..)
   , CandleConfig (..)
   , CandlestickGranularity (..)
@@ -11,15 +11,13 @@ module Request.InstrumentCandlesGET
 
 import           ApiMaker
 import           Data.Text                         (Text)
-import qualified Data.Text                         as T
 
 import           Data.Oanda.Candles
 import           Data.Oanda.CandlestickGranularity
 import           Data.Oanda.DateTime
-import           Data.Oanda.Instruments
 import           Data.Oanda.Types
 import           Data.Oanda.WeeklyAlignment
-import           Request.Class
+import           Request.Oanda.Class
 
 
 data GetInstrumentCandle = GetInstrumentCandle InstrumentName CandleConfig
@@ -47,19 +45,19 @@ instance Request OandaConfig GetInstrumentCandle where
   url cfg (GetInstrumentCandle instrument _) = baseUrl cfg /: "instruments" /: instrument /: "candles"
   body _ GetInstrumentCandle {} = NoReqBody
   response _ GetInstrumentCandle {} = jsonResponse
-  option _ (GetInstrumentCandle _ cfg) = headerRFC3339DatetimeFormat <> configs
+  option _ (GetInstrumentCandle _ cfg) = return $ headerRFC3339DatetimeFormat <> configs
     where
       configs =
         case cfg of
           CandleConfig p g c f t s i d a w ->
-             "price"             `queryParam` p           <>
-             "granularity"       `queryParam` fmap show g <>
-             "count"             `queryParam` c           <>
-             "from"              `queryParam` fmap show f <>
-             "to"                `queryParam` fmap show t <>
-             "smooth"            `queryParam` s           <>
-             "includeFirst"      `queryParam` i           <>
-             "dailyAlignment"    `queryParam` d           <>
-             "alignmentTimezone" `queryParam` a           <>
-             "weeklyAlignment"   `queryParam` fmap show w
+             "price"             `maybeQueryParam` p           <>
+             "granularity"       `maybeQueryParam` fmap show g <>
+             "count"             `maybeQueryParam` c           <>
+             "from"              `maybeQueryParam` fmap show f <>
+             "to"                `maybeQueryParam` fmap show t <>
+             "smooth"            `maybeQueryParam` s           <>
+             "includeFirst"      `maybeQueryParam` i           <>
+             "dailyAlignment"    `maybeQueryParam` d           <>
+             "alignmentTimezone" `maybeQueryParam` a           <>
+             "weeklyAlignment"   `maybeQueryParam` fmap show w
   process _ GetInstrumentCandle {} response = return $ responseBody response

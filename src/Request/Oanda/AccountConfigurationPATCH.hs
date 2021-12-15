@@ -5,7 +5,7 @@
 {-# LANGUAGE TypeFamilies          #-}
 
 
-module Request.AccountConfigurationPATCH
+module Request.Oanda.AccountConfigurationPATCH
   ( PatchAccountConfiguration(..)
   , AccountConfigurationUpdate (..)
   ) where
@@ -19,7 +19,7 @@ import           GHC.Generics
 import           Data.Oanda.AccountConfigurationResult
 import           Data.Oanda.DecimalNumber
 import           Data.Oanda.Types
-import           Request.Class
+import           Request.Oanda.Class
 
 data PatchAccountConfiguration = PatchAccountConfiguration AccountId AccountConfigurationUpdate
 
@@ -39,5 +39,5 @@ instance Request OandaConfig PatchAccountConfiguration where
   url cfg (PatchAccountConfiguration accId _)  = baseUrl cfg /: "accounts" /: accId /: "configuration"
   body _ (PatchAccountConfiguration _ config) = ReqBodyJson config
   response _ PatchAccountConfiguration {} = jsonResponse
-  option _ PatchAccountConfiguration {} = headerRFC3339DatetimeFormat
+  option _ PatchAccountConfiguration {} = return headerRFC3339DatetimeFormat
   process _ PatchAccountConfiguration {} response = return $ responseBody response

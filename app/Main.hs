@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 module Main where
 
 import           Control.Monad                (forM, forM_, void)
@@ -18,7 +19,8 @@ import           Data.Oanda.Accounts
 import           Data.Oanda.DateTime
 import           Data.Oanda.Instrument
 import           Data.Oanda.OrderRequest
-import           Request
+import           OandaApi
+
 
 main :: IO ()
 main = do

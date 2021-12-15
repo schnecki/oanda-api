@@ -10,18 +10,21 @@ module Data.Oanda.AccountUnits
 
 import           Control.DeepSeq
 import           Data.Aeson
+import           Data.Scientific  (toRealFloat)
 import           Data.Text        (pack, unpack)
 import           GHC.Generics
 import           Text.PrettyPrint
 import           Text.Printf
+import           Text.Read        (readMaybe)
 
 newtype AccountUnits =
   AccountUnits Float
   deriving (Generic, Show, Eq, Ord, NFData)
 
 instance FromJSON AccountUnits where
-  parseJSON (String v) = return $ AccountUnits (read $ unpack v)
-  parseJSON v = fail $ "Cannot parse non string to nubmer (value was '" ++ show v ++ "') in parseJSON of AccountUnits"
+  parseJSON (String v) = maybe (fail $ "expected number, encounted " ++ unpack v) (return . AccountUnits) (readMaybe $ unpack v)
+  parseJSON (Number v) = return $ AccountUnits (toRealFloat v)
+  parseJSON v          = fail $ "Cannot parse non string to nubmer (value was '" ++ show v ++ "') in parseJSON of AccountUnits"
 
 instance ToJSON AccountUnits where
   toJSON (AccountUnits v) = String (pack $ printf "%.4f" v)

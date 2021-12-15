@@ -5,7 +5,7 @@
 {-# LANGUAGE TypeFamilies          #-}
 
 
-module Request.OrderPOST
+module Request.Oanda.OrderPOST
   ( PostOrder (..)
   ) where
 
@@ -14,7 +14,7 @@ import           Control.DeepSeq
 import           Data.Aeson
 import           GHC.Generics
 
-import           Request.Class
+import           Request.Oanda.Class
 
 import           Data.Oanda.OrderRequest
 import           Data.Oanda.OrderRequestResult
@@ -39,5 +39,5 @@ instance Request OandaConfig PostOrder where
   url cfg (PostOrder accId _) = baseUrl cfg /: "accounts" /: accId /: "orders"
   body _ (PostOrder _ req) = ReqBodyJson (OrderPOST req)
   response _ PostOrder {} = jsonResponse
-  option _ PostOrder {} = mempty
+  option _ PostOrder {} = return mempty
   process _ PostOrder {} response = return $ responseBody response

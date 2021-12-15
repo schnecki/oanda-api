@@ -3,7 +3,7 @@
 {-# LANGUAGE TypeFamilies          #-}
 
 
-module Request.InstrumentsGET
+module Request.Oanda.InstrumentsGET
   ( GetInstruments(..)
   ) where
 
@@ -12,7 +12,7 @@ import qualified Data.Text              as T
 
 import           Data.Oanda.Instruments
 import           Data.Oanda.Types
-import           Request.Class
+import           Request.Oanda.Class
 
 
 data GetInstruments = GetInstruments AccountId (Maybe [InstrumentName])
@@ -26,7 +26,7 @@ instance Request OandaConfig GetInstruments where
   url cfg (GetInstruments id _) = baseUrl cfg /: "accounts" /: id /: "instruments"
   body _ GetInstruments {} = NoReqBody
   response _ GetInstruments {} = jsonResponse
-  option _ (GetInstruments _ mInsts) =
+  option _ (GetInstruments _ mInsts) = return $
     headerRFC3339DatetimeFormat <>
     case mInsts of
       Nothing    -> mempty

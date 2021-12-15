@@ -11,25 +11,25 @@
 -- PUT  /v3/accounts/{accountID}/orders/{orderSpecifier}/clientExtensions    Update the Client Extensions for an Order in an Account. Do not set, modify, or delete clientExtensions if your account is associated with MT4.
 
 
-module Request
+module Request.Oanda
     ( module R
     ) where
 
-import           Request.Class                     as R
+import           Request.Oanda.Class                     as R
 
-import           Request.AccountConfigurationPATCH as R
-import           Request.AccountDetailsGET         as R
-import           Request.AccountsGET               as R
-import           Request.AccountSummaryGET         as R
+import           Request.Oanda.AccountConfigurationPATCH as R
+import           Request.Oanda.AccountDetailsGET         as R
+import           Request.Oanda.AccountsGET               as R
+import           Request.Oanda.AccountSummaryGET         as R
 
-import           Request.OpenTradesGET             as R
+import           Request.Oanda.OpenTradesGET             as R
 
-import           Request.PositionsGET              as R
+import           Request.Oanda.PositionsGET              as R
 
-import           Request.OrderPOST                 as R
-import           Request.OrdersGET                 as R
+import           Request.Oanda.OrderPOST                 as R
+import           Request.Oanda.OrdersGET                 as R
 
-import           Request.InstrumentCandlesGET      as R
-import           Request.InstrumentsGET            as R
+import           Request.Oanda.InstrumentCandlesGET      as R
+import           Request.Oanda.InstrumentsGET            as R
 
 

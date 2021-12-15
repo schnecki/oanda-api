@@ -9,9 +9,7 @@ module Data.Oanda.TakeProfitOrder
 import           Control.DeepSeq
 import           Data.Aeson
 import           Data.Aeson.TH
-import           Data.Text
 import qualified Data.Text                        as T
-import           Data.Time
 import           GHC.Generics
 import           Prelude                          hiding (id)
 import           Text.PrettyPrint

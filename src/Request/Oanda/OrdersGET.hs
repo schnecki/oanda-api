@@ -5,7 +5,7 @@
 {-# LANGUAGE TypeFamilies          #-}
 
 
-module Request.OrdersGET
+module Request.Oanda.OrdersGET
   ( GetOrder (..)
   , OrderConfig (..)
   , maxOrders
@@ -18,7 +18,7 @@ import           Data.Aeson
 import qualified Data.Text                   as T
 import           GHC.Generics
 
-import           Request.Class
+import           Request.Oanda.Class
 
 import           Data.Oanda.OrderList
 import           Data.Oanda.OrderStateFilter
@@ -49,16 +49,16 @@ instance Request OandaConfig GetOrder where
   url cfg (GetOrder accId _) = baseUrl cfg /: "accounts" /: accId /: "orders"
   body _ (GetOrder _ req) = NoReqBody
   response _ GetOrder {} = jsonResponse
-  option _ (GetOrder _ cfg) = headerRFC3339DatetimeFormat <> configs
+  option _ (GetOrder _ cfg) = return $ headerRFC3339DatetimeFormat <> configs
     where
       configs =
         case cfg of
           OrderConfig ids state instrument count beforeID ->
-            "ids"        `queryParam` fmap (T.intercalate ";") ids <>
-            "state"      `queryParam` fmap show state <>
-            "instrument" `queryParam` instrument <>
-            "count"      `queryParam` count <>
-            "beforeID"   `queryParam` beforeID
+            "ids"        `maybeQueryParam` fmap (T.intercalate ";") ids <>
+            "state"      `maybeQueryParam` fmap show state <>
+            "instrument" `maybeQueryParam` instrument <>
+            "count"      `maybeQueryParam` count <>
+            "beforeID"   `maybeQueryParam` beforeID
 
   process _ GetOrder {} response = return $ responseBody response
 

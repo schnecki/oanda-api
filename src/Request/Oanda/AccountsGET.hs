@@ -3,14 +3,14 @@
 {-# LANGUAGE TypeFamilies          #-}
 
 
-module Request.AccountsGET
+module Request.Oanda.AccountsGET
   ( GetAccounts (..)
   ) where
 
 import           ApiMaker
 
 import           Data.Oanda.Accounts
-import           Request.Class
+import           Request.Oanda.Class
 
 data GetAccounts =
   GetAccounts
@@ -24,6 +24,6 @@ instance Request OandaConfig GetAccounts where
   url cfg GetAccounts = baseUrl cfg /: "accounts"
   body _ GetAccounts = NoReqBody
   response _ GetAccounts = jsonResponse
-  option _ GetAccounts = mempty
+  option _ GetAccounts = return mempty
   process _ GetAccounts response = return $ responseBody response
 

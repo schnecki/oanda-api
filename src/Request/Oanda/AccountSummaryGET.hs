@@ -5,7 +5,7 @@
 {-# LANGUAGE TypeFamilies          #-}
 
 
-module Request.AccountSummaryGET
+module Request.Oanda.AccountSummaryGET
   ( GetAccountSummary(..)
   ) where
 
@@ -13,7 +13,7 @@ import           ApiMaker
 
 import           Data.Oanda.AccountDetails
 import           Data.Oanda.Types
-import           Request.Class
+import           Request.Oanda.Class
 
 
 newtype GetAccountSummary = GetAccountSummary AccountId
@@ -27,5 +27,5 @@ instance Request OandaConfig GetAccountSummary where
   url cfg (GetAccountSummary id) = baseUrl cfg /: "accounts" /: id
   body _ GetAccountSummary {} = NoReqBody
   response _ GetAccountSummary {} = jsonResponse
-  option _ GetAccountSummary {} = headerRFC3339DatetimeFormat
+  option _ GetAccountSummary {} = return headerRFC3339DatetimeFormat
   process _ GetAccountSummary {} response = return $ responseBody response

@@ -46,6 +46,7 @@ dependencies:
 - cereal
 - cereal-text
 - cereal-time
+- scientific
 
 library:
   source-dirs: src

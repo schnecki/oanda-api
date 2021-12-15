@@ -10,7 +10,7 @@
 {-# LANGUAGE TypeFamilies               #-}
 {-# LANGUAGE UndecidableInstances       #-}
 {-# LANGUAGE UndecidableSuperClasses    #-}
-module Request.Class
+module Request.Oanda.Class
   ( Request(..)
   , Session(..)
   , OandaConfig (..)
@@ -26,18 +26,8 @@ module Request.Class
   , SafeReqM (..)
   ) where
 
-import           Control.Monad.Base
-import           Control.Monad.Except
-import           Control.Monad.IO.Class
-import           Control.Monad.Trans.Control
-import           Control.Monad.Trans.Reader
-import           Control.Monad.Trans.State
-import qualified Data.ByteString.Char8       as B
-import           Data.Proxy
-import           Data.Text                   (Text)
-import qualified Data.Text                   as T
-import qualified Data.Text.Encoding          as E
-import qualified Network.HTTP.Client         as C
+import qualified Data.ByteString.Char8 as B
+import           Data.Text             (Text)
 
 import           ApiMaker
 
