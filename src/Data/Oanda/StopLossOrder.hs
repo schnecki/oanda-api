@@ -62,22 +62,22 @@ data StopLossOrder =
                                                        -- “natural” trigger side “DEFAULT” results in. So for a Stop Loss Order
                                                        -- for a long trade valid values are “DEFAULT” and “BID”, and for short
                                                        -- trades “DEFAULT” and “ASK” are valid. [default=DEFAULT]
-    , fillingTransactionID    :: TransactionId         -- ^ ID of the Transaction that filled this Order (only provided when the
+    , fillingTransactionID    :: Maybe TransactionId   -- ^ ID of the Transaction that filled this Order (only provided when the
                                                        -- Order’s state is FILLED)
-    , filledTime              :: DateTime              -- ^ Date/time when the Order was filled (only provided when the Order’s state is FILLED)
-    , tradeOpenedID           :: TradeId               -- ^ Trade ID of Trade opened when the Order was filled (only provided when the Order’s
+    , filledTime              :: Maybe DateTime        -- ^ Date/time when the Order was filled (only provided when the Order’s state is FILLED)
+    , tradeOpenedID           :: Maybe TradeId         -- ^ Trade ID of Trade opened when the Order was filled (only provided when the Order’s
                                                        -- state is FILLED and a Trade was opened as a result of the fill)
-    , tradeReducedID          :: TradeId               -- ^ Trade ID of Trade reduced when the Order was filled (only provided when the Order’s
+    , tradeReducedID          :: Maybe TradeId         -- ^ Trade ID of Trade reduced when the Order was filled (only provided when the Order’s
                                                        -- state is FILLED and a Trade was reduced as a result of the fill)
-    , tradeClosedIDs          :: [TradeId]             -- ^ Trade IDs of Trades closed when the Order was filled (only provided when the
+    , tradeClosedIDs          :: Maybe [TradeId]       -- ^ Trade IDs of Trades closed when the Order was filled (only provided when the
                                                        -- Order’s state is FILLED and one or more Trades were closed as a result of the fill)
-    , cancellingTransactionID :: TransactionId         -- ^ ID of the Transaction that cancelled the Order (only provided when
+    , cancellingTransactionID :: Maybe TransactionId   -- ^ ID of the Transaction that cancelled the Order (only provided when
                                                        -- the Order’s state is CANCELLED)
-    , cancelledTime           :: DateTime              -- ^ Date/time when the Order was cancelled (only provided when the state of the Order
+    , cancelledTime           :: Maybe DateTime        -- ^ Date/time when the Order was cancelled (only provided when the state of the Order
                                                        -- is CANCELLED)
-    , replacesOrderId         :: OrderId               -- ^ The ID of the Order that was replaced by this Order (only provided if this Order
+    , replacesOrderId         :: Maybe OrderId         -- ^ The ID of the Order that was replaced by this Order (only provided if this Order
                                                        -- was created as part of a cancel/replace).
-    , replacedByOrderId       :: OrderId               -- ^ The ID of the Order that replaced this Order (only provided if this Order was
+    , replacedByOrderId       :: Maybe OrderId         -- ^ The ID of the Order that replaced this Order (only provided if this Order was
                                                        -- cancelled as part of a cancel/replace).
     }
   deriving (Show, Eq, Ord, Generic, NFData)
@@ -140,13 +140,13 @@ prettyStopLossOrder order =
     colName "timeInForce"             $$ nest nestCols (text $ show $ timeInForce order) $+$
     colName "gtdTime"                 $$ nest nestCols (text $ show $ gtdTime order) $+$
     colName "triggerCondition"        $$ nest nestCols (text $ show $ triggerCondition order) $+$
-    colName "fillingTransactionID"    $$ nest nestCols (text $ T.unpack $ fillingTransactionID order) $+$
+    mVal (fillingTransactionID order) (\v -> colName "fillingTransactionID"    $$ nest nestCols (text $ T.unpack v)) $+$
     colName "filledTime"              $$ nest nestCols (text $ show $ filledTime order) $+$
-    colName "tradeOpenedID"           $$ nest nestCols (text $ T.unpack $ tradeOpenedID order) $+$
-    colName "tradeReducedID"          $$ nest nestCols (text $ T.unpack $ tradeReducedID order) $+$
+    mVal (tradeOpenedID order) (\v -> colName "tradeOpenedID"           $$ nest nestCols (text $ T.unpack v)) $+$
+    mVal (tradeReducedID order) (\v -> colName "tradeReducedID"          $$ nest nestCols (text $ T.unpack v)) $+$
     colName "tradeClosedIDs"          $$ nest nestCols (text $ show $ tradeClosedIDs order) $+$
-    colName "cancellingTransactionID" $$ nest nestCols (text $ T.unpack $ cancellingTransactionID order) $+$
+    mVal (cancellingTransactionID order) (\v -> colName "cancellingTransactionID" $$ nest nestCols (text $ T.unpack v)) $+$
     colName "cancelledTime"           $$ nest nestCols (text $ show $ cancelledTime order) $+$
-    colName "replacesOrderId"         $$ nest nestCols (text $ T.unpack $ replacesOrderId order) $+$
-    colName "replacedByOrderId"       $$ nest nestCols (text $ T.unpack $ replacedByOrderId order)
+    mVal (replacesOrderId order) (\v -> colName "replacesOrderId"         $$ nest nestCols (text $ T.unpack v)) $+$
+    mVal (replacedByOrderId order) (\v -> colName "replacedByOrderId"       $$ nest nestCols (text $ T.unpack v))
 
