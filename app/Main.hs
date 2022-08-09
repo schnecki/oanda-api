@@ -50,7 +50,7 @@ main = do
         res <- mkReq $ GetInstrumentCandle "EUR_USD" candleCfg
         liftIO $ print res
       --   liftIO $ putStrLn $ take 100 $ show res
-      --   let orderReq = marketOrder "EUR_USD" 1.0 FOKMarketOrder 0.8
+      --   let orderReq = marketOrder "EUR_USD" 1.0 FOKMarketOrder
       --   liftIO $ print $ encode orderReq
       -- -- res <- mkReq $ PostOrder accId orderReq
       -- -- liftIO $ print res

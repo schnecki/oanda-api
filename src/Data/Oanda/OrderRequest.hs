@@ -45,16 +45,15 @@ marketOrder ::
   -> Quantity               -- ^ The quantity requested to be filled by the Market Order. A posititive number of units
                             -- results in a long Order, and a negative number of units results in a short Order.
   -> TimeInForceMarketOrder -- ^ The time-in-force requested for the Market Order
-  -> WorstPriceValue        -- ^ The worst price that the client is willing to have the Market Order filled at.
   -> OrderRequest
-marketOrder inst quantity tif priceBnd = MarketOrderRequest MARKET inst quantity (fromTimeInForceMarketOrder tif) priceBnd Fill.DEFAULT Nothing Nothing Nothing Nothing Nothing
+marketOrder inst quantity tif = MarketOrderRequest MARKET inst quantity (fromTimeInForceMarketOrder tif) Nothing Fill.DEFAULT Nothing Nothing Nothing Nothing Nothing
 
 data OrderRequest
   = MarketOrderRequest { orderRequestType       :: OrderType
                        , instrument             :: InstrumentName                -- ^ The Market Order’s Instrument.
                        , units                  :: DecimalNumber                 -- ^ The quantity requested to be filled by the Market Order. A posititive number of units results in a long Order, and a negative number of units results in a short Order.
                        , timeInForce            :: TimeInForce                   -- ^ The time-in-force requested for the Market Order. Restricted to FOK or IOC for a MarketOrder. [default=FOK]
-                       , marketPriceBound       :: PriceValue                    -- ^ The worst price that the client is willing to have the Market Order filled at.
+                       , marketPriceBound       :: Maybe PriceValue              -- ^ The worst price that the client is willing to have the Market Order filled at.
                        , positionFill           :: OrderPositionFill             -- ^ Specification of how Positions in the Account are modified when the Order is filled. [default=DEFAULT]
                        , clientExtensions       :: Maybe ClientExtensions        -- ^ The client extensions to add to the Order. Do not set, modify, or delete clientExtensions if your account is associated with MT4.
                        , takeProfitOnFill       :: Maybe TakeProfitDetails       -- ^ TakeProfitDetails specifies the details of a TakeProfitOrder to be created on behalf of a client. This may happen when an Order is filled that opens a Trade requiring a Take Profit, or when a Trade’s dependent Take Profit Order is modified directly through the Trade.
@@ -148,4 +147,3 @@ $(deriveToJSON
            in f
       }
     ''OrderRequest)
-
